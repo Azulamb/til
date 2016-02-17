@@ -1,2 +1,5 @@
-# til
-Today I Learned
+# TIL
+
+Today I Learned.
+
+何か今日一日で新しく覚えたことをメモっておくリポジトリが流行りつつあるらしいので、試してみる。
