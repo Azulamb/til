@@ -1,4 +1,4 @@
-## chootのパス
+## chrootのパス
 
     /usr/local/chroots/
 
