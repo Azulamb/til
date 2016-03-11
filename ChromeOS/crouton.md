@@ -16,6 +16,12 @@
 
 crouton integrasion( https://chrome.google.com/webstore/detail/crouton-integration/gcpneefbbnfalgjniomfjknbcgkbijom/related )を入れる場合にはxiwi,extensions辺りを入れる必要があるらしい。
 
+## Xfce4注意事項
+
+xfce4-desktopでインストール後、最初にデフォルト設定か空のパネルかどちらか選べと言われますが、デフォルトを選ばないとWindowsで言うタスクバー、Xfceだとtopmenuやgrobal menu、OS Xでいう一番上のメニューバー的なのが表示されません。
+
+後から頑張って入れようとしたものの微妙に失敗したので、最初デフォルトで後からいらないものを削った方が楽です。
+
 ## 入力デバイスの認識が切れる
 
 条件はよく分かりませんが、croutonでインストール中にキーボードなどが認識しなくなり、ユーザー名を入力できなかったりするので、それの対処法。
