@@ -13,15 +13,19 @@ Chromeook Pixelがintelの64bitなのでnode-v5.8.0-linux-x64.tar.xzをダウン
 
 ## 解凍
 
-    cd /home/chronos/user/Downloads
-    tar vxJf node-v5.8.0-linux-x64.tar.xz
+```
+cd /home/chronos/user/Downloads
+tar vxJf node-v5.8.0-linux-x64.tar.xz
+```
 
 ## 移動
 
 今回は/usr/local/node/バージョン名に入れることとします。
 
-    sudo mkdir /usr/local/node
-    mv node-v5.8.0-linux-x64 /usr/local/node/5.8.0
+```
+sudo mkdir /usr/local/node
+mv node-v5.8.0-linux-x64 /usr/local/node/5.8.0
+```
 
 バージョンは適宜変更してください。
 
@@ -29,9 +33,11 @@ Chromeook Pixelがintelの64bitなのでnode-v5.8.0-linux-x64.tar.xzをダウン
 
 /usr/local/binにnodeとnpmのリンクを張ります。
 
-    cd /usr/local/bin
-    sudo ln -s /usr/local/node/5.8.0/bin/node node
-    sudo ln -s /usr/local/node/5.8.0/bin/npm npm
+```
+cd /usr/local/bin
+sudo ln -s /usr/local/node/5.8.0/bin/node node
+sudo ln -s /usr/local/node/5.8.0/bin/npm npm
+```
 
 ここでnodeやnpmの保管が効くかどうか調べます。
 
