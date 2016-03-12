@@ -43,7 +43,7 @@ sudo ln -s /usr/local/node/5.8.0/bin/node node
 sudo ln -s /usr/local/node/5.8.0/bin/npm npm
 ```
 
-ここでnodeやnpmの保管が効くかどうか調べます。
+ここでnodeやnpmの補完が効くかどうか調べます。
 
 もし`ls -al`で赤いリンクになっていたらリンク切れですのでパスをちゃんと確かめてください。
 また、新しいバージョンを入れつつ切り替えたいときはこのシンボリックリンクを書き換えてください。
