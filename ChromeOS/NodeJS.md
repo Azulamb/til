@@ -29,6 +29,12 @@ mv node-v5.8.0-linux-x64 /usr/local/node/5.8.0
 
 バージョンは適宜変更してください。
 
+ついでに、/usr/local/nodeの権限を変えておくと`npm -i -g`した時にsudo要らない？
+
+```sh
+sudo chown -R chronos:chronos /usr/local/node
+```
+
 ## パスを通す
 
 ### 方法1:/usr/local/binにリンクを貼る
