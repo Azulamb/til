@@ -4,6 +4,8 @@
 
 Chromebook Pixel 2015上に構築しているので少し作業ディレクトリのパスが変ですが、そこは適宜置き換えてください。
 
+後成果物が23Gくらいあったので、ディスク容量はなんとかして用意してください。
+
 ```sh
 export WORKDIR=/home/chronos/user/workspace
 mkdir -p $WORKDIR
