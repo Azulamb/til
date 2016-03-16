@@ -1,6 +1,10 @@
 ## LLVM本体のインストール
 
+Chromebook Pixel 2015上に構築しているので少し作業ディレクトリのパスが変ですが、そこは適宜置き換えてください。
+
 ```sh
+export WORKDIR=/home/chronos/user/workspace
+cd $WORKDIR
 git clone http://llvm.org/git/llvm.git
 cd llvm
 ```
@@ -14,17 +18,21 @@ git checkout origin/release_37
 clangとか必要な場合は次のコマンド実行前に準備しておきます。
 
 ```sh
-cd tools/
+cd $WORKDIR/llvm/tools/
 git clone http://llvm.org/git/clang.git
 cd clang
 git checkout -b work origin/release_37
-cd ../../
+```
+
+```sh
+cd $WORKDIR/llvm/projects/
+git clone http://llvm.org/git/compiler-rt
 ```
 
 一通り準備したらLLVMの階層トップに戻り、configureを実行したあとmakeします。
 
 ```sh
-cd ../
+cd $WORKDIR
 mkdir llvm_build
 cd llvm_build
 ../llvm/configure
