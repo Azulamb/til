@@ -1,9 +1,12 @@
 ## LLVM本体のインストール
 
+目標はWebAssemblyとclangを扱えるようにすることです。
+
 Chromebook Pixel 2015上に構築しているので少し作業ディレクトリのパスが変ですが、そこは適宜置き換えてください。
 
 ```sh
 export WORKDIR=/home/chronos/user/workspace
+mkdir -p $WORKDIR
 cd $WORKDIR
 git clone http://llvm.org/git/llvm.git
 cd llvm
@@ -20,8 +23,6 @@ clangとか必要な場合は次のコマンド実行前に準備しておきま
 ```sh
 cd $WORKDIR/llvm/tools/
 git clone http://llvm.org/git/clang.git
-cd clang
-git checkout -b work origin/release_37
 ```
 
 ```sh
@@ -36,6 +37,6 @@ cd $WORKDIR
 mkdir llvm_build
 cd llvm_build
 ../llvm/configure
-make ENABLE_OPTIMIZED=1 DISABLE_ASSERTIONS=1 -j4
-sudo make ENABLE_OPTIMIZED=1 DISABLE_ASSERTIONS=1 install
+cmake -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX=/usr/local/bin -DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD=WebAssembly $WORKDIR/llvm 
+make -j 8
 ```
