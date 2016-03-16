@@ -40,4 +40,7 @@ mkdir llvm_build
 cd llvm_build
 cmake -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX=/usr/local -DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD=WebAssembly $WORKDIR/llvm 
 make -j 8
+sudo make install
 ```
+
+これで/usr/local/binや/usr/local/lib、/usr/local/includeなどに必要なファイルがインストールされます。
