@@ -36,7 +36,6 @@ git clone http://llvm.org/git/compiler-rt
 cd $WORKDIR
 mkdir llvm_build
 cd llvm_build
-../llvm/configure
 cmake -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX=/usr/local/bin -DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD=WebAssembly $WORKDIR/llvm 
 make -j 8
 ```
