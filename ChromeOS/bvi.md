@@ -2,13 +2,18 @@
 
 バイナリエディタは欲しいものですが、crewでbviが入らなかったのでソースからインストールしました。
 
+ChomeOSで若干苦労したのでメモ書き。
+
 ## ダウンロード
 
 http://bvi.sourceforge.net/download.html
 
+ブラウザからダウンロードします。
+
 ## 下準備
 
 ncursesが必要なのでインストール。
+crewの導入はしておいてください。
 
 またインストール時にcurses.hが必要だが見つからないと言われるので、ncurses内のcurses.hにリンクを張る荒業で凌ぎます。
 
@@ -16,6 +21,8 @@ ncursesが必要なのでインストール。
 crew install ncurses
 sudo ln -s /usr/local/include/ncurses/curses.h /usr/local/include/curses.h
 ```
+
+(`./configure`には--with-ncursesでncursesの入ってるパスとか指定できますが、curses.hはダメだったので、リンクを/us/local/binに貼ったらビルドが通って笑える。)
 
 ## 解凍からインストール
 
