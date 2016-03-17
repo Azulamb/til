@@ -33,5 +33,7 @@ wasm-as sample.wast -o sample.wasm
 
 LLVM IRから直接WebAssembly吐ける気がするというか、色んな所で回り道してるので、とりあえず動く環境作って上のが動いてから考えよう。
 
+## 動かし方
 
+Chrome canaryで動かす。
 
