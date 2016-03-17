@@ -93,6 +93,7 @@ app.on('activate', function () {
 ```
 
 基本的には開発中はapp/に入って`electron .`を実行して動作確認する感じになります。
+実行に必要なモジュールがあればこちらにインストールしていく形になります。
 
 ## package.json
 
@@ -113,10 +114,11 @@ app.on('activate', function () {
   "author": "Author",
   "license": "ISC",
   "dependencies": {
-    "asar": "0.10.0"
   }
 }
 ```
+
+こちらではビルドに必要なモジュールを追加していきます。
 
 これにより以下のコマンドが実行できます。
 
@@ -128,7 +130,7 @@ npm run run
 
 ### ビルド
 
-ソースは丸見え。
+resources/内はソースは丸見え。
 
 ```sh
 npm run build
