@@ -51,3 +51,8 @@ LLVM IRから直接WebAssembly吐ける気がするというか、色んな所�
 
 Chrome canaryで動かす。
 
+https://www.google.co.jp/chrome/browser/canary.html
+
+chrome://flags/#enable-webassembly
+
+
