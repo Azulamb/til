@@ -33,6 +33,8 @@ wasm-as sample.wast -o sample.wasm
 
 LLVM IRから直接WebAssembly吐ける気がするというか、色んな所で回り道してるので、とりあえず動く環境作って上のが動いてから考えよう。
 
+希望としてはLLVM IRをWebAssembly(wasm)に直接変換してくれるようなの。
+
 |拡張子|形式|何者か|
 |:-----|----|-----:|
 |.c    |TEXT|C言語ののコード|
