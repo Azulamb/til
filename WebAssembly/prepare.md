@@ -15,8 +15,8 @@ https://github.com/WebAssembly/binaryen
 色々なサイトの断片をかき集めてそれっぽいバイナリを吐くまでの道のり
 
 ```sh
-clang -emit-llvm --target=wasm32 -Oz -S sample.c
-llc sample.ll -march=wasm32 -filetype=asm -o sample.s
+clang -emit-llvm --target=wasm32 -S sample.c
+llc sample.ll -march=wasm32
 s2wasm sample.s > sample.wast
 wasm-as sample.wast -o sample.wasm
 ```
@@ -25,9 +25,13 @@ wasm-as sample.wast -o sample.wasm
 まだ動かしてないのでメモ書き
 
 * clangでC/C++→LLVM IRに変換
+    * sample.c ==> sample.ll
 * llcでLLVM IRをアセンブリコードに変換
+    * sample.ll ==> sample.s
 * s2wasmでアセンブリコードをWebAssemblyのテキストコードに変換(S-Expression format？)
+    * sample.s ==> sample.wast
 * wasm-asでWebAssemblyのテキストコードをバイトコードに変換
+    * sample.wast ==> sample.wasm
 
 してるように見える。
 
@@ -36,11 +40,11 @@ LLVM IRから直接WebAssembly吐ける気がするというか、色んな所�
 希望としてはLLVM IRをWebAssembly(wasm)に直接変換してくれるようなの。
 
 |拡張子|形式|何者か|
-|:-----|----|-----:|
-|.c    |TEXT|C言語ののコード|
+|:-----|----|------|
+|.c    |TEXT|C言語のコード|
 |.ll   |TEXT|LLVM IR?|
 |.s    |TEXT|アセンブリ|
-|.wast |TEXT|WebAssemblyのテキスト形式？S-Expressionというらしい？|
+|.wast |TEXT|WebAssemblyのテキスト形式。S-Expressionというらしい。|
 |.wasm |BIN |WebAssemblyのバイナリ形式。|
 
 ## 動かし方
