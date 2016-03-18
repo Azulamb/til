@@ -1,19 +1,24 @@
 ## メニューバーの追加
 
+メモ
+
+* メニューのonclickはroleに変えて特定の文字列を渡すと、その処理をやってくれる。
+    * minimizeで最小化、closeで終了など。
+
 ```js
 'use strict';
 
-const electron = require('electron');
+const electron = require( 'electron' );
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
-const Menu = require('menu');
+const Menu = require( 'menu' );
 
 let MainWindow;
 
 function CreateWindow () {
-	MainWindow = new BrowserWindow({width: 800, height: 600});
+	MainWindow = new BrowserWindow( { width: 800, height: 600 } );
 
-	MainWindow.loadURL('file://' + __dirname + '/src/index.html');
+	MainWindow.loadURL( 'file://' + __dirname + '/src/index.html' );
 
 	InstallMenu();
 
@@ -22,28 +27,25 @@ function CreateWindow () {
 		MainWindow = null;
 	});
 }
-app.on('ready', CreateWindow);
 
-app.on('window-all-closed', function ()
+app.on( 'ready', CreateWindow );
+
+app.on( 'window-all-closed', function ()
 {
-	// On OS X it is common for applications and their menu bar
-	// to stay active until the user quits explicitly with Cmd + Q
 	if ( process.platform !== 'darwin' ) {
 		app.quit();
 	}
 });
 
-app.on('activate', function ()
+app.on( 'activate', function ()
 {
-	// On OS X it's common to re-create a window in the app when the
-	// dock icon is clicked and there are no other windows open.
 	if ( MainWindow === null )
 	{
 		CreateWindow();
 	}
 });
 
-function Reload(item, focusedWindow)
+function Reload( item, focusedWindow )
 {
 	if ( focusedWindow )
 	{
@@ -87,7 +89,7 @@ function DevelopTools(item, focusedWindow)
 
 function About()
 {
-	require('electron').shell.openExternal('http://electron.atom.io');
+	require( 'electron' ).shell.openExternal( 'http://electron.atom.io' );
 }
 
 function InstallMenu() {
@@ -97,7 +99,7 @@ function InstallMenu() {
 			label: 'System',
 			submenu: [
 				{ label: 'Reload', accelerator: 'CmdOrCtrl+R', click: Reload },
-				{ label: 'Toggle Full Screen', accelerator: KeyFullScreen(), click: ToggleFullScreen},
+				{ label: 'Toggle Full Screen', accelerator: KeyFullScreen(), click: ToggleFullScreen },
 				{ label: 'Toggle Developer Tools', accelerator: KeyDevelop(), click: DevelopTools },
 			]
 		},
