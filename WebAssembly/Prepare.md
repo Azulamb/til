@@ -1,6 +1,8 @@
 ## LLVMの用意
 
-https://github.com/HirokiMiyaoka/til/blob/master/LLVM/build_wasm.md
+WebAssemblyに対応したLLVMのビルド方法は以下。
+
+https://github.com/HirokiMiyaoka/til/blob/master/LLVM/BuildWasm.md
 
 ## binaryenの用意
 
