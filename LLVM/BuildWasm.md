@@ -14,12 +14,6 @@ git clone http://llvm.org/git/llvm.git
 cd llvm
 ```
 
-この資料を書いてる時にはWebAssemblyの環境構築中で、バージョン3.7が対象らしいので、ブランチを切り替えます。
-
-```sh
-git checkout origin/release_37
-```
-
 clangとか必要な場合は次のコマンド実行前に準備しておきます。
 
 ```sh
@@ -32,7 +26,7 @@ cd $WORKDIR/llvm/projects/
 git clone http://llvm.org/git/compiler-rt
 ```
 
-一通り準備したらLLVMの階層トップに戻り、configureを実行したあとmakeします。
+一通り準備したら作業ディレクトリ(llvm_build)を作ってcmakeの後makeします。CPUガン回しで頑張ってもらいます。
 
 ```sh
 cd $WORKDIR
