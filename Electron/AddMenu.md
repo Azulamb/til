@@ -15,7 +15,8 @@ const Menu = require( 'menu' );
 
 let MainWindow;
 
-function CreateWindow () {
+function CreateWindow ()
+{
 	MainWindow = new BrowserWindow( { width: 800, height: 600 } );
 
 	MainWindow.loadURL( 'file://' + __dirname + '/src/index.html' );
@@ -32,7 +33,8 @@ app.on( 'ready', CreateWindow );
 
 app.on( 'window-all-closed', function ()
 {
-	if ( process.platform !== 'darwin' ) {
+	if ( process.platform !== 'darwin' )
+	{
 		app.quit();
 	}
 });
