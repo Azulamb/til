@@ -9,7 +9,7 @@ ChromebookにNode.jsをインストールする手順。
 
 https://nodejs.org/en/
 
-Chromeook Pixelがintelの64bitなのでnode-v5.8.0-linux-x64.tar.xzをダウンロードする。以後このファイルを使うが適宜置き換えてください。
+Chromeook Pixel 2015がintelの64bitなのでnode-v5.8.0-linux-x64.tar.xzをダウンロードする。以後このファイルを使うが適宜置き換えてください。
 
 ## 解凍
 
