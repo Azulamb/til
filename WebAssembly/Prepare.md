@@ -213,12 +213,17 @@ wastでmodule配下にあったものがそのまま出てる感じですね。
 
 C/C++のファイルを1つ与えると、それに対応したWebAssemblyのバイナリを出力するコマンドを作りました。
 
+https://github.com/HirokiMiyaoka/til/blob/master/WebAssembly/c2wasm
+
+ダウンロードして使う場合は以下のようにしてください。
+
 ```sh
 wget https://raw.githubusercontent.com/HirokiMiyaoka/til/master/WebAssembly/c2wasm
 chmod a+x c2wasm
 ```
 
-上のコマンドを順番に実行してるだけです。面倒な人はこれを入れて/usr/local/bin辺りに放り込めば以下のようにしてコンパイルできます。
+中身はただのshellで、今回使ったコマンドを順番に実行してるだけです。
+面倒な人はこれを入れて/usr/local/bin辺りに放り込めば以下のようにしてコンパイルできます。
 
 ```sh
 c2wasm sample.c
@@ -229,8 +234,6 @@ c2wasm sample.c -o sample.wasm
 ```
 
 中間生成ファイルがそのまま残るので、llやwastなどのファイルも見れます。
-
-
 
 ## 捕捉
 
