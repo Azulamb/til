@@ -49,8 +49,7 @@ do
             output=$2
             ;;
         * )
-            if [ "$2" = "" ]; then
-                continue
+            if [ "$2" = "" ]; then                continue
             fi
             input="$2"
             ;;
@@ -67,7 +66,9 @@ fi
 #============================#
 
 if [ "$input" = "" -o ! -e "$input" ]; then
-    help
+    echo "ERROR: Input file not exist."
+    echo "You can see the arguments in \"c2wasm -h\""
+    exit 1
 fi
 
 if [ "$output" = "" ]; then
