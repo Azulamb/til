@@ -57,7 +57,7 @@ int count(){return c++;}
     * sample.c ==> sample.ll
 * `llc`でLLVM IRをアセンブリコードに変換
     * sample.ll ==> sample.s
-* `s2wasm`でアセンブリコードをWebAssemblyのテキストコードに変換(S-Expression format？)
+* `s2wasm`でアセンブリコードをWebAssemblyのテキストコードに変換(S式)
     * sample.s ==> sample.wast
 * `sexpr-wasm`(本当は`wasm-as`を使いたい)でWebAssemblyのテキストコードをバイトコードに変換
     * sample.wast ==> sample.wasm
@@ -138,7 +138,7 @@ WebAssemblyの中身が見れるということで、sample.wastを見てみま�
 
 ## ブラウザの用意
 
-Chrome canaryで動かすので、インストールします。
+Chrome Canaryで動かすので、インストールします。
 
 https://www.google.co.jp/chrome/browser/canary.html
 
