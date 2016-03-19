@@ -28,7 +28,7 @@ sudo make install
 
 ## sexp-wasm-prototypeの用意
 
-コンパイルにはC/C++コードから紆余曲折を経てWebAssemblyのテキスト形式（後述）を生成し、それをバイナリに変換するのですが、上のコマンドの中のwasm-asが期待通りにバイナリに変換してくれないので、別途ツールを導入します。
+コンパイルにはC/C++コードから紆余曲折を経てWebAssemblyのテキスト形式（後述）を生成し、それをバイナリに変換するのですが、上のコマンドの中の`wasm-as`が期待通りにバイナリに変換してくれないので、別途ツールを導入します。
 
 https://github.com/WebAssembly/sexpr-wasm-prototype
 
@@ -44,7 +44,7 @@ sudo cp out/sexpr-wasm /usr/local/bin
 ## コンパイル
 
 以下サンプルコードをWebAssemblyのバイナリとして出力します。
-ファイル名はsample.cとします。
+ファイル名は`sample.c`とします。
 
 ```c
 int c=0;
@@ -83,7 +83,7 @@ sexpr-wasm -o sample.wasm sample.wast
 
 ### wastについて
 
-WebAssemblyの中身が見れるということで、sample.wastを見てみます。
+WebAssemblyの中身が見れるということで、`sample.wast`を見てみます。
 
 ```wast
 (module
@@ -150,7 +150,7 @@ chrome://flags/#enable-webassembly
 
 ## JavaScriptで読み込む
 
-生成したWebAssemblyのバイナリをsample.wasmとした時、Cで実装したcount関数を呼び出してその返り値を反映するサンプルコードです。
+生成したWebAssemblyのバイナリを`sample.wasm`とした時、Cで実装したcount関数を呼び出してその返り値を反映するサンプルコードです。
 
 ボタンをクリックするたびにカウントが増えていきます。
 
