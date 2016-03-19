@@ -1,3 +1,9 @@
+## ブラウザでWebAssemblyを動かす
+
+とうとうWebAssemblyが実行可能なブラウザが出てきましたね。
+
+今回はブラウザでWebAssemblyを動かすところまでやってみたいと思います。
+
 ## LLVMの用意
 
 WebAssemblyに対応したLLVMのビルド方法は以下。
