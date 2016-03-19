@@ -49,7 +49,8 @@ do
             output=$2
             ;;
         * )
-            if [ "$2" = "" ]; then                continue
+            if [ "$2" = "" ]; then
+                continue
             fi
             input="$2"
             ;;
