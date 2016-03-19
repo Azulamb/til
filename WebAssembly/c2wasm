@@ -88,4 +88,5 @@ llc -march=wasm32 -o $out.s $out.ll
 s2wasm $out.s > $out.wast
 
 # WebAssembly(S-Expression) => WebAssembly(Binary)
-wasm-as $out.wast -o $out.wasm
+#wasm-as -o $out.wasm $out.wast
+sexpr-wasm -o $out.wasm $out.wast
