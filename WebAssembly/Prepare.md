@@ -76,7 +76,7 @@ sexpr-wasm -o sample.wasm sample.wast
 |拡張子|形式|何者か|
 |:-----|----|------|
 |.c    |TEXT|C言語のコード|
-|.ll   |TEXT|LLVM IR?|
+|.ll   |TEXT|LLVM IR|
 |.s    |TEXT|アセンブリ|
 |.wast |TEXT|WebAssemblyのテキスト形式。S-Expression。つまりS式|
 |.wasm |BIN |WebAssemblyのバイナリ形式。|
