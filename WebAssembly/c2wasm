@@ -1,0 +1,91 @@
+#!/bin/sh
+
+#============================#
+# Function                   #
+#============================#
+
+help()
+{
+    echo "OVERVIEW: Compile from C/C++ file to WebAssembly."
+    echo ""
+    echo "USAGE: c2wasm [options] <input C/C++ file>"
+    echo ""
+    echo "OPTIONS:"
+    echo "General options:"
+    echo ""
+    echo "-o        - Output filename."
+    exit 1    
+}
+
+version()
+{
+    echo "c2wasm 0.1"
+    exit 0
+}
+
+#============================#
+# Prepare                    #
+#============================#
+
+# Output filename.
+output=""
+
+# Input C/C++ files.
+input=""
+
+# Arguments.
+for OPT in $*
+do
+    case $OPT in
+        "-h" | "--h" | "--help" ) help ;;
+        '-v' | "--v" | "--version" ) version ;;
+        '-o' )
+            output=$2
+            ;;
+        * )
+            if [ "$2" = "" ]; then
+                continue
+            fi
+            input="$2"
+            ;;
+    esac
+    shift
+done
+
+if [ "$input" = "" ]; then
+    input=$1
+fi
+
+#============================#
+# Check                      #
+#============================#
+
+if [ "$input" = "" -o ! -e "$input" ]; then
+    help
+fi
+
+if [ "$output" = "" ]; then
+    file=`basename $input .c`
+    if [ "$file" = "$input" ]; then
+        file=`basename $input .cpp`
+    fi
+    output="$file.wasm"
+fi
+
+out=`basename $output .wasm`
+
+#============================#
+# Compile                    #
+#============================#
+
+# C/C++ => LLVM IR
+clang -emit-llvm --target=wasm32 -S $input -o $out.ll
+
+# LLVM IR => Assembly? 
+llc -march=wasm32 -o $out.s $out.ll
+
+# Assembly? => WebAssembly(S-Expression format)
+s2wasm $out.s > $out.wast
+
+# WebAssembly(S-Expression) => WebAssembly(Binary)
+wasm-as $out.wast -o $out.wasm
