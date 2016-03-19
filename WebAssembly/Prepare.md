@@ -199,7 +199,7 @@ chrome://flags/#enable-webassembly
 console.logでmoduleを書き出しているので、ざっと出力を見ると以下の様な感じになっています。
 
 ```
-module Object {
+module: Object {
     expots: Object {
         count: function,
         memory: ArrayBuffer,
