@@ -78,8 +78,45 @@ sexpr-wasm -o sample.wasm sample.wast
 |.c    |TEXT|C言語のコード|
 |.ll   |TEXT|LLVM IR?|
 |.s    |TEXT|アセンブリ|
-|.wast |TEXT|WebAssemblyのテキスト形式。S-Expressionというらしい。|
+|.wast |TEXT|WebAssemblyのテキスト形式。S-Expression。つまりS式|
 |.wasm |BIN |WebAssemblyのバイナリ形式。|
+
+### wastについて
+
+WebAssemblyの中身が見れるということで、sample.wastを見てみます。
+
+```wast
+(module
+  (memory 1
+    (segment 8 "\00\00\00\00")
+  )
+  (export "memory" memory)
+  (export "count" $count)
+  (func $count (result i32)
+    (local $$0 i32)
+    (i32.store offset=8
+      (i32.const 0)
+      (i32.add
+        (set_local $$0
+          (i32.load offset=8
+            (i32.const 0)
+          )
+        )
+        (i32.const 1)
+      )
+    )
+    (return
+      (get_local $$0)
+    )
+  )
+)
+;; METADATA: { "asmConsts": {},"staticBump": 11 }
+```
+
+ざっとみて分かるのは、`export`で関数の`count`と一緒に`memory`(Cで確保してるグローバル変数)も吐き出されていることくらいでしょうか。
+これはサンプルを動かした時のために少し頭の片隅に入れておきます。
+
+### wasmについて
 
 これでバイナリが出力されますが、少し古いLLVMだと出力されるバイナリがブラウザで使えません。
 バイナリエディタ(bviとか)があれば、開いてみて以下のような感じのファイルになってれば大丈夫です。
@@ -113,8 +150,69 @@ chrome://flags/#enable-webassembly
 
 ## JavaScriptで読み込む
 
+生成したWebAssemblyのバイナリをsample.wasmとした時、Cで実装したcount関数を呼び出してその返り値を反映するサンプルコードです。
+
+ボタンをクリックするたびにカウントが増えていきます。
+
+```html
+<!doctype html>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>WebAssembly Test</title>
+</head>
+<body>
+
+<input type="button" id="countup" value="CountUp?" />
+
+<script type='text/javascript'>
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', 'sample.wasm', true);
+  xhr.responseType = 'arraybuffer';
+  xhr.onload = function() {
+    var binary = xhr.response;
+    var binarray = new Uint8Array( binary );
+    var module = Wasm.instantiateModule( binarray, {} );
+    console.log( module );
+    document.getElementById( 'countup' ).addEventListener( 'click', function (){
+      this.value = module.exports.count();
+    }, false);
+  };
+  xhr.send(null);
+</script>
+
+</body>
+</html>
+```
+
+ここでいくつかポイントが。
+
+* scriptタグで読み込んでくれたり、みたいな情報は今のところなし。
+    * 今JavaSciptでファイルをダウンロードしているが、面倒でもこれが必要。
+* 基本処理は以下の流れ
+    * 入手したバイナリデータ(binary:ArrayBuffer)を配列(binarray:Uint8Array)に変換
+    * `Wasm.instantiateModule`で解析
+    * moduleには読み込んだWebAssemblyのコードなどが入っている。
+
+console.logでmoduleを書き出しているので、ざっと出力を見ると以下の様な感じになっています。
+
+```
+module Object {
+    expots: Object {
+        count: function,
+        memory: ArrayBuffer,
+    }
+}
+```
+
+wastでmodule配下にあったものがそのまま出てる感じですね。
+
 ## 捕捉
 
 clangとの連動では、emscriptenの利用例をよく見る気がします。
 
 https://github.com/kripken/emscripten
+
+C/C++との連動だけなら、これを使うのが良いっぽい？
