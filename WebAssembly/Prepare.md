@@ -43,7 +43,7 @@ sudo cp out/sexpr-wasm /usr/local/bin
 
 ## コンパイル
 
-以下サンプルコードをWebAssemblyのバイナリを出力します。
+以下サンプルコードをWebAssemblyのバイナリとして出力します。
 ファイル名はsample.cとします。
 
 ```c
