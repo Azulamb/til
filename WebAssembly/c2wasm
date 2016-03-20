@@ -20,7 +20,7 @@ help()
     echo "General options:"
     echo ""
     echo "-o        - Output filename."
-    exit 1    
+    exit 0
 }
 
 version()
