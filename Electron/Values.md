@@ -1,8 +1,8 @@
+Electronではいろいろな値が取得できるのでそのまとめ。
+
 ## processの中身
 
-Electronではprocessオブジェクトの中にいろいろ値が入ってるので、それについてメモ書き。
-
-## キー全抽出
+### キー全抽出
 
 とりあえず以下コード埋め込めばキー一覧が出てくるので、気になったものを見ればよいと思います。
 
@@ -89,9 +89,9 @@ listeners
 listenerCount
 ```
 
-## 気になった値や役立ちそうな値
+### 気になった値や役立ちそうな値
 
-### versions
+#### versions
 
 Electronで使用されるもろもろのシステムのバージョンが取得できます。以下例。
 
@@ -115,7 +115,7 @@ console.log( process.versions );
 
 Electron本体やNode.jsのみならず、V8やChromeのバージョンも取得できます。
 
-### 実行環境
+#### 実行環境
 
 いろいろな出し分けとかで使えそうなの。
 
@@ -129,7 +129,7 @@ x64
 win32
 ```
 
-### 環境変数
+#### 環境変数
 
 Node.jsと同じく。値は省略します。
 
@@ -140,3 +140,24 @@ console.log(process.env);
 npm_package_*にはpackage.jsonで指定した値とかが入ってる模様。
 
 他何か気になるのとかあったら追記予定。
+
+## ユーザーディレクトリ
+
+Electron実行時に、ユーザーディレクトリを。作ってくれるらしい。
+
+パスは以下ーどで取得できる。
+
+```
+const electron = require( 'electron' );
+const app = electron.app;
+
+app.getPath('userData');
+```
+
+Windowsでは以下の場所にある。
+
+```
+C:\Users\[ユーザー名]\AppData\Roaming\[package.jsonで指定したname]
+```
+
+ここに設定ファイルとか置けばいいはず。
