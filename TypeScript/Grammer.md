@@ -13,6 +13,14 @@ declare var val;
 
 ## 型周り
 
+### 引数の型を院胃にする
+
+変数名の後に?をつける。
+
+```
+function ( name?: string ) {}
+```
+
 ### 関数の型
 
 ```
@@ -20,6 +28,14 @@ declare var val;
 ```
 
 返り値の型がない場合 `void` を指定する。
+
+#### 例
+
+```
+() => void
+( strnum: string ) => int
+( name: string, value?: string ) => void
+```
 
 ### 型定義の読み込み
 
