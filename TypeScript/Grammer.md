@@ -21,6 +21,20 @@ declare var val;
 function ( name?: string ) {}
 ```
 
+### 可変長引数
+
+可変長引数かつその型が全て、決まっているような場合以下のように記述可能
+
+```
+function CSVLine( ...items: string[] ): string
+{
+	return items.join( ',' );
+}
+
+// aa,bb,cc
+console.log( CSVLine( 'aa', 'bb', 'cc' ) );
+```
+
 ### 関数の型
 
 ```
