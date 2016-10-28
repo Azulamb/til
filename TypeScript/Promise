@@ -15,3 +15,9 @@ Promise.allで配列を渡す場合などは、次のようにして配列を定
 ```
 const p: Promise<{}>[] = [];
 ```
+
+## PromiseLike
+
+確かthen辺りのメソッドを持ってるオブジェクトは、PromiseLikeなオブジェクトなので、Promiseっぽく使えます
+
+TypeScriptでの型もそのままPromiseLikeです。
