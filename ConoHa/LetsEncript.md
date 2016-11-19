@@ -30,5 +30,41 @@ yum install epel-release
 yum install certbot python-certbot-apache
 ```
 
+## 証明書の入手
 
-git
+めんどうなのでroot権限で作業します。
+
+適当な作業ディレクトリを作ってそこに移動してください。
+
+```
+git clone https://github.com/letsencrypt/letsencrypt
+cd letsencrypt/
+```
+
+ここで次のようなコマンドを実行して、証明書を入手します。
+
+```
+./letsencrypt-auto certonly --standalone --email your@email.address -d conoha.example.com
+```
+
+`--email` にはあなたのメールアドレスを指定してください。
+
+`-d` には発行するドメインを指定してください。
+
+実行後、次のように表示されれば成功です。
+
+```
+IMPORTANT NOTES:
+ - Congratulations! Your certificate and chain have been saved at
+   /etc/letsencrypt/live/conoha.example.com/fullchain.pem. Your cert
+   will expire on 2017-02-17. To obtain a new or tweaked version of
+   this certificate in the future, simply run letsencrypt-auto again.
+   To non-interactively renew *all* of your certificates, run
+   "letsencrypt-auto renew"
+ - If you like Certbot, please consider supporting our work by:
+
+   Donating to ISRG / Let's Encrypt:   https://letsencrypt.org/donate
+   Donating to EFF:                    https://eff.org/donate-le
+```
+
+これで `/etc/letsencrypt/live/conoha.example.com/` に証明書がダウンロードされます。
