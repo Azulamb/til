@@ -10,12 +10,12 @@ ConoHaのVPSに独自ドメインを割り当てるとき、ConoHaのDNSに管�
 
 レジストラが提供するネームサーバーの変更機能は、ドメインの設定すべてをどこに回すかなので、すでにレジストラでいくつもドメインを管理している場合は面倒です。
 
-今回であれば `example.com` 内の `conoha.example.com` だけをConoHaのDNSに管理させたい場合、NSレコードを直に追加します。
+今回であれば `example.com` 内の `conoha.example.com` だけをConoHaのDNSに管理させたい場合、以下のNSレコードを直に追加します。
 
 ```
-ns conoha ns-a1.conoha.io.
-ns conoha ns-a2.conoha.io.
-ns conoha ns-a3.conoha.io.
+ns-a1.conoha.io.
+ns-a2.conoha.io.
+ns-a3.conoha.io.
 ```
 
 このレコードが追加できないレジストラは諦めて移植するなり何なりしてください。
@@ -27,7 +27,13 @@ ns conoha ns-a3.conoha.io.
 
 そこから無料ネームサーバー→ドメインのDNS設定とページを移動し、契約中のドメインのDNSを編集してください。
 
-後は上にあるNSレコードを追加すれば終了です。
+後は以下のNSレコードを追加すれば終了です。
+
+```
+ns conoha ns-a1.conoha.io.
+ns conoha ns-a2.conoha.io.
+ns conoha ns-a3.conoha.io.
+```
 
 ## ConoHaの設定
 
