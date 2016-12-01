@@ -31,11 +31,13 @@ const obj: { name: string } = { name: '' }; // OK
 ```
 const obj: { name?: string } = {}; // OK?
 const name: string = obj.name; // Error
+if ( obj.name ){ const name: string = obj.name; } // OK
+const name: string = obj.name ? obj.name : ''; // OK
 ```
 
 しかし、これを使ってしまうと他の部分でnullチェックをしないといけないなどの影響が出てきます。
 
-(1行目は良いが、2行目は`name`がstring型の変数なのに、`obj.name`がundefinedやnullの可能性があるので、チェックしないとエラーになる。)
+(1行目は良いが、2行目は`name`がstring型の変数なのに、`obj.name`がundefinedやnullの可能性があるので、3,4行目のようにチェックしないとエラーになる。)
 
 nullを入らないことを許容しつつも、最初の初期化だけnullを入れる場合は次のようにします。
 
