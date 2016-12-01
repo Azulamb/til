@@ -23,6 +23,7 @@ nullを許容しないNon-nullable typesはnullやundefinedによるエラーを
 
 ```
 const obj: { name: string } = {}; // Error
+const obj: { name: string } = { name: '' }; // OK
 ```
 
 この場合、キー名の最後に?をつけると、null/undefinedを許容します。
@@ -40,10 +41,13 @@ nullを入らないことを許容しつつも、最初の初期化だけnullを
 
 ```
 const obj: { name: string } = { name: <any>null }; // OK
+const name: string = obj.name; // No error!!!
 obj.name = "hello";
 ```
 
 これを使う場合はちゃんとプログラマーがnullが入った状態で他の処理にデータが渡らないことを保証してください。
+
+(2行目はNon-nullable types時でもエラーにならない。あくまで`obj.name`はnullやundefinedではないstring型という認識なので。)
 
 ## 任意の値を追加可能なオブジェクト
 
