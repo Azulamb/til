@@ -57,3 +57,8 @@ console.log( CSVLine( 'aa', 'bb', 'cc' ) );
 /// <reference path="PATH_TO_TS.ts" />
 ```
 
+## 後で
+
+https://blogs.msdn.microsoft.com/typescript/2016/12/07/announcing-typescript-2-1/
+
+TypeScript 2.1の内容。結構便利なのがあるっぽいのでここに入れたい。
