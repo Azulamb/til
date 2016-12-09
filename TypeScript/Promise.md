@@ -40,10 +40,10 @@ Retnum().then( result )
 これに関する注意が2点
 
 * Promise生成をしている関数では、ちゃんと型があっているか調べてくれない
-    * 上記だと、RetNumで例えば`return Promise.resolve('test');`とかしてもエラーにならない。
-    * ここら辺は今後に期待？
+	* 上記だと、RetNumで例えば`return Promise.resolve('test');`とかしてもエラーにならない。
+	* ここら辺は今後に期待？
 * catchの型は指定できない
-    * 後述
+	* 後述
 
 ## catchの引数の型
 
