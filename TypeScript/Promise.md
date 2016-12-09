@@ -53,7 +53,7 @@ function Success()
 
 ### Promiseオブジェクトに対して成功失敗の後の処理を書く
 
-上で書いたような形でPromiseオブジェクトに対して、`then`と`catch`をメソッドチェインでつなげて書くことができます。
+上で書いたような形でPromiseオブジェクトに対して、`then`と`catch`をメソッドチェインでつなげて書くことができる。
 
 ```
 promiseObj.then( function( result )
@@ -69,9 +69,9 @@ promiseObj.then( function( result )
 
 ### 成功や失敗を連鎖させる
 
-`then`や`catch`はそこに到達する前に実行した結果で飛ぶので、どんどん連鎖させたりすることができます。
+`then`や`catch`はそこに到達する前に実行した結果で飛ぶので、どんどん連鎖させたりすることができる。
 
-例えば作ったすべてのPromise.allを使う時には、必ず成功させる必要があったりします。
+例えば作ったすべてのPromise.allを使う時には、必ず成功させる必要があったりするので重宝する。
 
 #### Promise.allにおける例
 
