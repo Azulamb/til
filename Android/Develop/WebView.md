@@ -21,6 +21,9 @@ http://itpro.nikkeibp.co.jp/atcl/idg/14/481542/120700306/?ST=cm-software&P=2
 
 * システムWebViewのバージョンが53とか54
 * Android 7.0 NougatでChromeのバージョンが53とか54
+    * 7.0からはWebViewの機能をデフォルトではChromeが担当する。
+    * 設定で変更可能らしいので、場合によってはそこでWebViewを割り当てることも可能だとか。
+    * とにかく設定で利用しているWebViewがちゃんと想定されたものかの確認が必要。
 
 対応は以下
 
