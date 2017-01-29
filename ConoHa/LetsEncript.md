@@ -68,3 +68,45 @@ IMPORTANT NOTES:
 ```
 
 これで `/etc/letsencrypt/live/conoha.example.com/` に証明書がダウンロードされます。
+
+## 自動更新
+
+以下の様に `letsencrypt-auto` コマンドを実行すると、証明書を更新できます。
+
+```
+./letsencrypt-auto renew
+```
+もちろんWebサーバーを落として、上のコマンドを実行して、再度起動する必要があります。
+
+面倒なので、スクリプトを用意して、crontabで実行します。
+
+```
+#!/bin/sh
+
+echo "==== Update ===="
+
+/bin/date
+
+# Prepare env.
+
+echo "==== Stop server."
+# Stop server.
+
+echo "==== Update cert."
+cd /PATH/TO/letsencrypt
+./letsencrypt-auto renew
+
+echo "==== Start server."
+# Start server.
+```
+
+コメントがある部分と `/PATH/TO/letsencrypt` は適切に設定します。
+例えばNode.jsを使っている場合、 `npm` が必要になるので、nvm使用時には `. /usr/local/nvm/nvm.sh` を実行して、PATHを通して置く必要があります。
+次にこれをcrontabで実行できるようにしておきます。
+
+```
+15 3 1 * * /PATH/TO/SCRIPT >> /PATH/TO/LOG 2>&1
+```
+期限切れが3ヶ月とかそれくらいだった気がするので、だいたい一ヶ月に一回更新処理を走らせれば問題ないでしょう。
+
+上の例だと毎月1日の午前3時15分に自動的にサーバーを落として証明書を更新し、サーバーを起動します。
