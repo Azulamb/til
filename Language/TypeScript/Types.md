@@ -1,6 +1,6 @@
 # 型定義周りのメモ
 
-## 独自定義の型をサーバー/クライアント療法で参照する
+## 独自定義の型をサーバー/クライアント両方で参照する
 
 TypeScriptでの実装メリットに、型が変わった時に明確にエラー個所が分かるという点があります。
 
@@ -51,3 +51,41 @@ types.jsの中身が空でも、import等を使えばこのような構造で出
  
  SublimeTextなどの自動補完が効かない場合、一旦再起動などしてみましょう。
  
+## Promiseでの型
+
+以下のようなコードを考える。
+
+```
+function A(): Promise<number>
+{
+	return Promise.resolve( 10 );
+}
+
+function B(): Promise<string>
+{
+	return A().then( ( result ) =>
+	{
+		return Promise.resolve( result + '' );
+	} );
+}
+```
+
+この時 `B()` では `Promise` の結果として `string` を返すが、`A()` をreturnしているため、このままでは返り値の肩が `Promise<number>` になってしまい、エラーになる。
+
+この場合、次のような型指定で `Promise<string>` を返すと明示できる。
+
+
+```
+function A(): Promise<number>
+{
+	return Promise.resolve( 10 );
+}
+
+function B(): Promise<string>
+{
+	return A().then( ( result ): Promise<string> =>
+	{
+		return Promise.resolve( result + '' );
+	} );
+}
+```
