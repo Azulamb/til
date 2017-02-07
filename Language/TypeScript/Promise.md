@@ -128,3 +128,43 @@ thenに引き続き、失敗したときのcatchに渡される引数の型で�
 
 理由としては、どうも他の失敗で投げられた例外なんかもこっちで引き取るので、型を決めることができないんだとか。
 なので、catchの型についてはあきらめましょう。
+
+
+## thenで型が変わる場合
+
+以下のようなコードを考える。
+
+```
+function A(): Promise<number>
+{
+	return Promise.resolve( 10 );
+}
+
+function B(): Promise<string>
+{
+	return A().then( ( result ) =>
+	{
+		return Promise.resolve( result + '' );
+	} );
+}
+```
+
+この時 `B()` では `Promise` の結果として `string` を返すが、`A()` をreturnしているため、このままでは返り値の肩が `Promise<number>` になってしまい、エラーになる。
+
+この場合、次のような型指定で `Promise<string>` を返すと明示できる。
+
+
+```
+function A(): Promise<number>
+{
+	return Promise.resolve( 10 );
+}
+
+function B(): Promise<string>
+{
+	return A().then( ( result ): Promise<string> =>
+	{
+		return Promise.resolve( result + '' );
+	} );
+}
+```
