@@ -63,7 +63,7 @@ promiseObj.then( function( result )
 } ).catch( function( error )
 {
 	// 失敗したとき
-	// resultにはrejectやPromise.reject、その他エラーや例外が渡した値が入っている。
+	// errorにはrejectやPromise.reject、その他エラーや例外が渡した値が入っている。
 } );
 ```
 
@@ -94,9 +94,9 @@ const p: Promise<{}>[] = [];
 
 ## PromiseLike
 
-確かthen辺りのメソッドを持ってるオブジェクトは、PromiseLikeなオブジェクトなので、Promiseっぽく使えます
+確かthen辺りのメソッドを持ってるオブジェクトは、PromiseLikeなオブジェクトなので、Promiseっぽく使える。
 
-TypeScriptでの型もそのままPromiseLikeです。
+TypeScriptでの型もそのままPromiseLike。
 
 ## thenの引数の型
 
