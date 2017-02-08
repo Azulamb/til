@@ -100,15 +100,15 @@ TypeScriptでの型もそのままPromiseLike。
 
 ## thenの引数の型
 
-Promiseで成功したときに次のthenに処理が進みますが、これの型を指定できる。
+Promiseで成功したときに次のthenに処理が進むが、これの型を指定できる。
 
 ```
 function RetNum(): Promise<number> { ... }
 
-Retnum().then( result )
+Retnum().then( function( result )
 {
 	// result is number.
-}
+} );
 ```
 
 RetNumが返す型が、Promiseオブジェクトかつthenの引数に何を返すかを記述している（今回はnumber）。
