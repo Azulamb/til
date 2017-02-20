@@ -2,7 +2,7 @@
 
 ## Gogland
 
-JetbeansのGo用IDE。
+JetbrainsのGo用IDE。
 
 実はTypeScriptとかいくつか最近の言語もサポートしているように見える（使ったことはない）。
 
