@@ -12,8 +12,8 @@
 
 ```
 app/ ... サーバービルド後の格納場所
-  Main.js ... サーバーの起動ファイル
-public/ ... クライアントビルド後の格納場所
+  Main.js ... サーバーの起動ファイル
+docs/ ... クライアントビルド後の格納場所
   app.js
 src/
   client/
@@ -49,52 +49,7 @@ package.json
 * server
     * サーバーの実行。
 
-## クライアント側
+## tsconfigの内容
 
-```
-{
-	"compilerOptions": {
-		"outFile": "../../public/app.js",
-		"module": "system",
-		"moduleResolution": "node",
-		"target": "es5",
-		"strictNullChecks": true,
-		"noImplicitAny": true,
-		"removeComments": true,
-		"preserveConstEnums": false,
-		"sourceMap": false
-	},
-	"include": [
-		"./**/*.ts"
-	]
-}
-```
-
-`src/client/` 以下のTypeScriptファイルをすべてビルドして、`public/app.js` に固めます。
-
-とりあえずES5に対応した出力にするようにしますが、モダンブラウザ向けならES6でもいいはず。
-
-## サーバー側
-
-```
-{
-	"compilerOptions": {
-		"outDir": "../../app",
-		"module": "commonjs",
-		"target": "es6",
-		"strictNullChecks": true,
-		"noImplicitAny": true,
-		"removeComments": true,
-		"preserveConstEnums": false,
-		"sourceMap": false
-	},
-	"include": [
-		"./**/*.ts"
-	]
-}
-```
-
-`app/` 以下に各ファイルを個別にビルドして配置します。
-
-必ず `Main.ts` というファイルを用意して、そこからサーバーが起動するようにします。
+[こちらを参照](tsconfig.md)
 
