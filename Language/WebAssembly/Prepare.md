@@ -8,7 +8,7 @@
 
 WebAssemblyに対応したLLVMのビルド方法は以下。
 
-https://github.com/HirokiMiyaoka/til/blob/master/LLVM/BuildWasm.md
+https://github.com/HirokiMiyaoka/til/blob/master/Language/LLVM/BuildWasm.md
 
 
 ## binaryenの用意
@@ -213,12 +213,12 @@ wastでmodule配下にあったものがそのまま出てる感じですね。
 
 C/C++のファイルを1つ与えると、それに対応したWebAssemblyのバイナリを出力するコマンドを作りました。
 
-https://github.com/HirokiMiyaoka/til/blob/master/WebAssembly/c2wasm
+https://github.com/HirokiMiyaoka/til/blob/master/Language/WebAssembly/c2wasm
 
 ダウンロードして使う場合は以下のようにしてください。
 
 ```sh
-wget https://raw.githubusercontent.com/HirokiMiyaoka/til/master/WebAssembly/c2wasm
+wget https://raw.githubusercontent.com/HirokiMiyaoka/til/blob/master/Language/WebAssembly/c2wasm
 chmod a+x c2wasm
 ```
 
