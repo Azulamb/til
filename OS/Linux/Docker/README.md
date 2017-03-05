@@ -82,5 +82,5 @@ docker commit ID IMAGE
 ## コンテナを起動
 
 ```
-docker start -i ID
+docker start -i IDとか名前
 ```
