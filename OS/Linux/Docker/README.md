@@ -19,3 +19,16 @@ docker images
 ```
 docker run -i -t --name NAME IMAGE /bin/bash
 ```
+
+## 今動いてるコンテナの一覧
+
+```
+docker ps
+```
+
+## 最後に実行したコンテナ情報の表示及びIDだけ表示
+
+```
+docker ps -l
+docker ps -l -q
+```
