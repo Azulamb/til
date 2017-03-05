@@ -31,7 +31,9 @@
 +-------------------+
 | コンテナたち       |---->[docker ps](表示)
 +-------------------+
-
+ |
+ v
+[docker start](起動)
 ```
 
 # コマンド
@@ -54,6 +56,8 @@ docker images
 docker run -i -t --name NAME IMAGE /bin/bash
 ```
 
+`-i`をつけると中に入って作業ができる。後述の`docker start`でも同様。
+
 実行したら色々インストールしたりして、それをイメージとして保存可能。
 
 ## 今動いてるコンテナの一覧
@@ -69,4 +73,14 @@ docker ps -l
 docker ps -l -q
 ```
 
-## 
+## コンテナの状態をイメージに保存
+
+```
+docker commit ID IMAGE
+```
+
+## コンテナを起動
+
+```
+docker start -i ID
+```
