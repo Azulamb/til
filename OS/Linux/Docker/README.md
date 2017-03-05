@@ -31,9 +31,10 @@
 +-------------------+
 | コンテナたち       |---->[docker ps](表示)
 +-------------------+
- |
- v
-[docker start](起動)
+ |                |
+ v                v
+[docker start]   [docker rm](削除)
+(起動)
 ```
 
 # コマンド
@@ -53,7 +54,7 @@ docker images
 ## イメージに名前をつけて実行
 
 ```
-docker run -i -t --name NAME IMAGE /bin/bash
+docker run -i -t --name NAME -p CONTPORT:HOSTPORT -h HOSTNAME IMAGE /bin/bash
 ```
 
 `-i`をつけると中に入って作業ができる。後述の`docker start`でも同様。
