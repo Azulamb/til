@@ -99,7 +99,7 @@ Electronで使用されるもろもろのシステムのバージョンが取得
 console.log( process.versions );
 ```
 
-```json
+```js
 { http_parser: '2.6.0',
   node: '5.1.1',
   v8: '4.9.385.28',
@@ -145,7 +145,7 @@ npm_package_*にはpackage.jsonで指定した値とかが入ってる模様。
 
 Electron実行時に、ユーザーディレクトリを作ってくれるらしい。
 
-パスは以下ーどで取得できる。
+パスは以下コードで取得できます。
 
 ```
 const electron = require( 'electron' );
@@ -154,7 +154,7 @@ const app = electron.app;
 app.getPath('userData');
 ```
 
-Windowsでは以下の場所にある。
+Windowsでは以下の場所にあります。
 
 ```
 C:\Users\[ユーザー名]\AppData\Roaming\[package.jsonで指定したname]
