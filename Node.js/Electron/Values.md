@@ -137,7 +137,18 @@ Node.jsと同じく。値は省略します。
 console.log(process.env);
 ```
 
-npm_package_*にはpackage.jsonで指定した値とかが入ってる模様。
+#### package.jsonの値
+
+~~npm_package_*にはpackage.jsonで指定した値とかが入ってる模様。~~
+
+npmから起動すると `process.env.npm_package_XXX` でpackage.jsonのXXXの値を取得できるそうですが、通常起動だと無理らしいので、package.jsonの値がほしい場合、以下のように取り込みましょう。
+
+```
+const pkg = require( './package.json' );
+```
+通常必要なのはメインプロセス側のはずなのでこれで大丈夫なはず。
+
+----
 
 他何か気になるのとかあったら追記予定。
 
