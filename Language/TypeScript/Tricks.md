@@ -76,3 +76,26 @@ obj[ 'address' ] = 'Japan'; // OK
 const obj: { name: string, [ key: string ]: any } = { name: '' };
 obj[ 'id' ] = 0; // OK
 ```
+
+## nullの無視
+
+`document.getElementById()`ではHTMLElementかnullが返されるため、以下のような記述はnullを許容しない場合にエラーになる。
+
+```
+const e = document.getElementById( 'ID' );
+e.innerHTML = 'test'; // <=== ERROR!!!
+```
+
+ここで `e` はnullの可能性があるのでエラーになってしまう。
+かといってeの型をHTMLElementにしても、eへの代入でエラーが発生してしまう。
+
+必ず存在していてエラーを無視したい場合は、次のように記述する。
+
+```
+const e = <HTMLElement>document.getElementById( 'ID' );
+e.innerHTML = 'test'; // <=== OK!
+```
+
+HTMLElementかnullを返すので、これをHTMLElementにキャストしてあげればエラーが出なくなる。
+ただし利用には注意すること。
+
