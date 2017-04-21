@@ -168,3 +168,48 @@ function B(): Promise<string>
 	} );
 }
 ```
+
+## さらに型の判定
+
+TypeScript 2.2.2 + https://github.com/Microsoft/TypeScript-Sublime-Plugin を利用した時、SublimeTextで型補完の時の情報を見てみた時。
+
+```
+function PrmString1() // Promise<{}>
+{
+	return new Promise( ( resolve, reject ) =>
+	{
+		resolve( '' );
+	} );
+}
+
+function PrmString2(): Promise<string>
+{
+	return new Promise( ( resolve, reject ) =>
+	{
+		resolve( '' );
+	} );
+}
+
+PrmString1().then( ( data ) =>
+{
+	return Promise.resolve( 0 );
+} ).then( ( data ) =>
+{
+	// data: {}
+} );
+
+
+PrmString2().then( ( data ) =>
+{
+	return Promise.resolve( 0 );
+} ).then( ( data ) =>
+{
+	// data: number
+} );
+```
+
+これを見る限り、元が `Promise<{}>` の時はreturn時にそれを引き継ぐが、そうでない場合は `string` から `number` に型が変わっている。
+
+ちゃんと指定した方が補完時にちゃんとしてくれるよ。ということだろうか。
+
+
