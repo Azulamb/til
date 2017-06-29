@@ -3,9 +3,9 @@
 とりあえずサンプルとして。
 スマートフォンの縦長に合わせて、アスペクト比3:4のブロックのみを中央に表示するサンプル。
 
-## HTML5
+## ソース
 
-```
+``` html
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -36,13 +36,7 @@ article {
 	right: 0;
 	width: 100vmin;
 	height: calc( 400vmin / 3 );
-  background-color: lightgray;
-}
-
-canvas {
-	display: block;
-	width: 100%;
-	height: 100%;
+	background-color: lightgray;
 }
 
 @media screen and (min-aspect-ratio: 3/4) {
@@ -60,3 +54,15 @@ canvas {
 </body>
 </html>
 ```
+
+パターンは3つ。
+
+* アスペクト比を維持した場合、高さが足りない場合
+    * 横幅=vminで、横幅100vmin、高さは400vmin/3になる。
+* アスペクト比を維持した場合、高さが最大だが、横幅は高さより小さい。
+    * 理論上、ここから先は高さが最大で横幅を制限する。ただしvmax、vminを使う場合、高さの基準が異なる。
+    * この場合高さ=vmaxで、横幅75vmax、高さ100vmaxになる。
+* アスペクト比を維持した場合、高さが最大で画面は横長。
+    * この場合高さ-vminで、横幅が75vmin、高さ100vminになる。
+
+縦長の場合は、75とか4/3辺りを修正すればいける。
