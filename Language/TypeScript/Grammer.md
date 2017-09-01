@@ -51,6 +51,33 @@ console.log( CSVLine( 'aa', 'bb', 'cc' ) );
 ( name: string, value?: string ) => void
 ```
 
+### classに定数を持たせる
+
+やりたいことは以下のような感じ。
+
+```
+class A{
+	enum Color{ Red, Green, Blue } // Error
+}
+
+//// other file.
+
+console.log( A.Color.Red );
+```
+
+こんな感じのを実現するのは以下。
+
+```
+enum AColor{ Red, Green, Blue }
+class A{
+	static Color = AColor;
+}
+
+//// other file.
+
+console.log( A.Color.Red ); // OK
+```
+
 ### 型定義の読み込み
 
 ```
