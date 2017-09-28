@@ -155,3 +155,7 @@ export = ProxyServer;
 ```
 
 `proxyRules` はプロキシサーバーに作らせて、それをElectron側で設定している。
+
+後は何も考えずWebviewでsrcを指定すればプロキシが刺さる。
+
+
