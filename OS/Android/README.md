@@ -11,3 +11,10 @@
     * https://play.google.com/store/apps/details?id=com.google.android.inputmethod.japanese&hl=ja
 * QRコード系アプリ
 * 遠隔操作周り
+
+# 言語入力について
+
+海外端末で変なキーボードがある場合があるので大雑把なメモ
+
+* キーボードレイアウトでちゃんとしたのを選ぶ
+    * 物理キーボードの場合はそちらにあるかも。
