@@ -51,11 +51,11 @@ https://electron.atom.io/docs/api/webview-tag/
 
 ### メインプロセス
 ```
-    import ProxyServer = require( './ProxyServer' );
-    // 省略
-    const win = new BrowserWindow( {} );
-    const ps = ProxyServer();
-    (<Electron.Session>electron.session.defaultSession).allowNTLMCredentialsForDomains( '*' );
+	import ProxyServer = require( './ProxyServer' );
+	// 省略
+	const win = new BrowserWindow( {} );
+	const ps = ProxyServer();
+	(<Electron.Session>electron.session.defaultSession).allowNTLMCredentialsForDomains( '*' );
 	win.webContents.session.setProxy( <Electron.Config>{ proxyRules: ps.proxyRules() }, () =>
 	{
 		this.win.loadURL( 'file://' + __dirname + '/index.html' );
