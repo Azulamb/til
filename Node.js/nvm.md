@@ -42,6 +42,12 @@ nvm install 7.0.0
 
 7.0.0を`ls-remote`で得たv以降の数値に。置き換えます
 
+### Node.jsの阿吽インストール
+
+```
+nvm uninstall 7.0.0
+```
+
 ### Node.jsのバージョン切り替え
 
 ```
