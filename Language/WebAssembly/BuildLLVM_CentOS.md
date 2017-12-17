@@ -1,3 +1,4 @@
+```
 # ~/bin
 # ~/work/
 # ~/work/build
@@ -21,4 +22,4 @@ make -j 8
 
 # install llvm
 make install
-
+```
