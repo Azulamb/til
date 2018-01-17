@@ -10,6 +10,8 @@
 * Google日本語入力
     * https://play.google.com/store/apps/details?id=com.google.android.inputmethod.japanese&hl=ja
 * QRコード系アプリ
+* モバイル通信制御
+    * https://play.google.com/store/apps/details?id=com.google.android.apps.freighter&hl=ja
 * 遠隔操作周り
 
 # 言語入力について
