@@ -51,6 +51,19 @@ console.log( CSVLine( 'aa', 'bb', 'cc' ) );
 ( name: string, value?: string ) => void
 ```
 
+### 関数の型を型定義
+
+例えばコールバック関数などを受け取るときに使います。
+
+```
+interface 型名{(引数) :返り値};
+```
+
+#### 例
+
+```
+interface CallbackFunction{ ( argv :number ) :string };
+```
 ### classに定数を持たせる
 
 やりたいことは以下のような感じ。
