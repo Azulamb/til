@@ -67,6 +67,8 @@ interface CallbackFunction{ ( argv :number ) :string };
 function Sample( cb: CallbackFunction ) {
 	console.log( cb( 1 ) );
 }
+
+Sample( ( num: number ) => { return 'test' + num; } );
 ```
 ### classに定数を持たせる
 
