@@ -63,6 +63,10 @@ interface 型名{(引数) :返り値};
 
 ```
 interface CallbackFunction{ ( argv :number ) :string };
+
+function Sample( cb: CallbackFunction ) {
+	console.log( cb( 1 ) );
+}
 ```
 ### classに定数を持たせる
 
