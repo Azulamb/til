@@ -47,7 +47,7 @@ console.log( CSVLine( 'aa', 'bb', 'cc' ) );
 
 ```
 () => void
-( strnum: string ) => int
+( strnum: string ) => number
 ( name: string, value?: string ) => void
 ```
 
