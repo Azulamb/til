@@ -92,6 +92,12 @@ Promise.allで配列を渡す場合などは、次のようにして配列を定
 const p: Promise<{}>[] = [];
 ```
 
+newする時、以下のようにすると返り値の型を指定できる。
+
+```
+new Promise<string>( ( resolve ) => { resolve( 'return string' ); } );
+```
+
 ## PromiseLike
 
 確かthen辺りのメソッドを持ってるオブジェクトは、PromiseLikeなオブジェクトなので、Promiseっぽく使える。
