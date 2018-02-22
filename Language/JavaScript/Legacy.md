@@ -14,7 +14,7 @@ function BrowserCheck()
 	if ( !( 'content' in document.createElement( 'template' ) ) ) { return false; }
 
 	// This browser can use CSS Custom properties
-	const styles = getComputedStyle(document.documentElement);
+	var styles = getComputedStyle(document.documentElement);
 	if ( styles.getPropertyValue( '--cp' ).trim() !== '0' ) { return false; }
 
 	// This browser is modern.
