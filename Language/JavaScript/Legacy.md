@@ -7,15 +7,22 @@
 ```
 function BrowserCheck()
 {
-	// This browser can use fetch
+	// fetch, Promise
 	if ( typeof fetch !== 'function' ) { return false; }
 
-	// This browser can use <template>
+	// <template>
 	if ( !( 'content' in document.createElement( 'template' ) ) ) { return false; }
 
-	// This browser can use CSS Custom properties
+	// <dialog>
+	var dialog = <HTMLDialogElement>document.createElement( 'dialog' );
+	if ( typeof dialog.showModal !== 'function' || typeof dialog.close !== 'function' ) { return false; }
+
+	// CSS Custom properties
 	var styles = getComputedStyle(document.documentElement);
 	if ( styles.getPropertyValue( '--cp' ).trim() !== '0' ) { return false; }
+	
+	// ServiceWorker?
+	if ( !( 'serviceWorker' in navigator ) ) { return false; }
 
 	// This browser is modern.
 	return true;
@@ -40,6 +47,11 @@ IEとかレガシーな奴は対応してないし、AJAXみたいに何かい�
 
 使いたかったから。
 
+### `<dialog>`
+
+この判定式を書いてる時点では **Chromeしか対応していない** やばいやつ。HTML5.2で搭載予定。
+これを使うと最新のChrome以外全部弾くぞ！！やばい！！
+
 ### `CSS カスタムプロパティ`
 
 めっちゃ便利だし、強力なので積極的に使っていきたい。
@@ -59,6 +71,10 @@ IEとかレガシーな奴は対応してないし、AJAXみたいに何かい�
 ```
 <style type="text/css">:root{--cp:0;}</style>
 ```
+
+### `ServiceWorker`
+
+PWAに必須の機能。使う場合は入れるし使わない場合は入れない。
 
 ## 削除理由
 
