@@ -70,6 +70,57 @@ function Sample( cb: CallbackFunction ) {
 
 Sample( ( num: number ) => { return 'test' + num; } );
 ```
+
+### interfaceの継承
+
+例えばあるデータ構造を定義して、それの派生形として値を追加したデータ構造を定義したいとき、継承が可能です。
+
+```
+interface A
+{
+	message: string;
+}
+
+interface A_Error extends A
+{
+	type: number;
+}
+```
+
+### classの継承
+
+いろいろあるので一括で。
+
+```
+class A
+{
+	public up ()  {}
+}
+
+class B
+{
+	public down() {}
+}
+
+interface C
+{
+	walk(): void;
+}
+
+class AChild extends A {}
+
+class AB implements A, B
+{
+	public up() {}
+	public down() {}
+}
+
+class AC extends A implements C
+{
+	public walk(){}
+}
+```
+
 ### classに定数を持たせる
 
 やりたいことは以下のような感じ。
