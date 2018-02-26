@@ -20,8 +20,9 @@ function BrowserCheck()
 	if ( typeof dialog.showModal !== 'function' || typeof dialog.close !== 'function' ) { return false; }
 
 	// CSS Custom properties
-	var styles = getComputedStyle(document.documentElement);
-	if ( styles.getPropertyValue( '--cp' ).trim() !== '0' ) { return false; }
+	var style = document.createElement('style').style;
+	style.setProperty( '--test', '0' );
+	if ( style.getPropertyValue( '--test' ) !== '0' ){ return false; }
 	
 	// ServiceWorker?
 	if ( !( 'serviceWorker' in navigator ) ) { return false; }
@@ -63,16 +64,6 @@ IEとかレガシーな奴は対応してないし、Ajaxみたいに何かい�
 
 `getPropertyValue` でCSSカスタムプロパティを取得しているが、`--*` という文法がこれ独自で、例えばIE等はこれを取得すると空になるらしいので、判定処理として入れてみた。
 他の非対応ブラウザの挙動も見たいが、わりと昔から実装が入ってたっぽいので、そこそこ対応されてしまっているためどこまで判別が正しいか怪しい。
-
-この判定のためには以下スタイルが必要。
-
-```
-:root{--cp:0;}
-```
-
-```
-<style type="text/css">:root{--cp:0;}</style>
-```
 
 ### `ServiceWorker`
 
