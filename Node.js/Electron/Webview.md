@@ -44,6 +44,47 @@ https://electron.atom.io/docs/api/webview-tag/
 
 # 連携
 
+## WebViewにイベントを送りたい
+
+クリックとかそういうイベントを送れる。
+
+```
+webview.sendInputEvent( { type: 'mouseDown', x: 50, y: 100, button:'left', clickCount: 1 } );
+```
+
+これで50,100の場所で左クリックの開始したイベントが発生する。クリック1セットだと以下のような感じ。
+
+```
+const x = 50;
+const y = 100;
+webview.sendInputEvent( <any>{ type: 'mouseDown', x: x, y: y, button:'left', clickCount: 1 } );
+webview.sendInputEvent( <any>{ type: 'mouseUp', x: x, y: y, button:'left', clickCount: 1 } );
+```
+
+
+## WebView内でJSを実行したい
+
+```
+webview.executeJavaScript( 'document.body.scrollTop;', false, ( scroll ) =>
+{
+	// scrollにはスクロール量が入っている
+//
+} );
+```
+
+`executeJavaScript`はWebView内でJSコードを実行します。
+与えるコードは文字列で、帰ってくる値はreturnなどしないで良いことから、恐らく開発者ツールなどで直にJSを実行する感じで実行し、その結果を返しているものと思われます。
+
+ちょっと長いコードの場合、関数を`toString()`で文字列にして、最初の関数定義とかを取り除けば行けるっぽいです。以下例。
+
+```
+const code = function() { console.log( 'test' ); }
+// console.log( 'test' ); のみにする。
+const codestr = code.toString().replace( /^function\s*\(\)\*\{/, '' ).replace( /\}$/ ).trim();
+```
+
+こんな感じでいいらしい。
+
 ## Webviewにプロキシを刺したい
 
 今回はメインプロセス側でプロキシサーバーを作って、そいつを使わせることとする。
