@@ -6,24 +6,29 @@
 
 使う人はコピペして必要なやつだけ残せばいいと思う。
 
+※これを作り始めた当時Chrome歯科対応していない`<dialog>`の判定が（自分が使いたいという理由で）入っているので、ちゃんと不要な判定を消さないとひどい目にあうぞ！！
+
 ```
 function BrowserCheck()
 {
 	// fetch, Promise
 	if ( typeof fetch !== 'function' ) { return false; }
 
+	// <dialog>
+	var dialog = document.createElement( 'dialog' );
+	if ( typeof dialog.showModal !== 'function' || typeof dialog.close !== 'function' ) { return false; }
+
 	// <template>
 	if ( !( 'content' in document.createElement( 'template' ) ) ) { return false; }
 
-	// <dialog>
-	var dialog = <HTMLDialogElement>document.createElement( 'dialog' );
-	if ( typeof dialog.showModal !== 'function' || typeof dialog.close !== 'function' ) { return false; }
+	// Custom Elements.
+	if ( !( 'customElements' in window ) || typeof customElements.define !== 'function' ) { return false; }
 
 	// CSS Custom properties
 	var style = document.createElement('style').style;
 	style.setProperty( '--test', '0' );
 	if ( style.getPropertyValue( '--test' ) !== '0' ){ return false; }
-	
+
 	// ServiceWorker?
 	if ( !( 'serviceWorker' in navigator ) ) { return false; }
 
@@ -46,14 +51,18 @@ IEとかレガシーな奴は対応してないし、Ajaxみたいに何かい�
 * fetch
 * Promise
 
+### `<dialog>`
+
+この判定式を書いてる時点では **Chromeしか対応していない** やばいやつ。HTML5.2で搭載予定。
+これを有効にすると最新のChrome以外全部弾くぞ！！やばい！！普通に使いたかったら外そう！！
+
 ### `<template>`
 
 使いたかったから。
 
-### `<dialog>`
+### `Custom Elements`
 
-この判定式を書いてる時点では **Chromeしか対応していない** やばいやつ。HTML5.2で搭載予定。
-これを使うと最新のChrome以外全部弾くぞ！！やばい！！
+使いたかったから。
 
 ### `CSS カスタムプロパティ`
 
