@@ -21,8 +21,14 @@ function BrowserCheck()
 	// <template>
 	if ( !( 'content' in document.createElement( 'template' ) ) ) { return false; }
 
-	// Custom Elements.
+	// Custom Elements
 	if ( !( 'customElements' in window ) || typeof customElements.define !== 'function' ) { return false; }
+
+
+	// Custom Elements v1
+	//customElements.define( 'ce-test', class extends HTMLInputElement{}, { extends: 'input' } );
+	//var e = document.createElement( 'ce-test' );
+	//if ( typeof e.value !== 'string' ) { return false; }
 
 	// CSS Custom properties
 	var style = document.createElement('style').style;
@@ -63,6 +69,19 @@ IEとかレガシーな奴は対応してないし、Ajaxみたいに何かい�
 ### `Custom Elements`
 
 使いたかったから。
+
+### `Custom Elements v1`
+
+上に同じく。
+
+コメントアウトしているのは以下理由。
+
+* 中途半端に対応してあるCustom Elements v1は以下のような状態にあり、正常に使えない。
+    * `Uncaught TypeError: Illegal constructor` が発生する。
+        * `HTMLInputElement` 等を継承時、 `customElements.define` の第三引数に `{ extends: 'input' }` を与えたとしても、第一引数で与えられたタグ名でタグを追加できない。
+	* 回避方法として、例えば`<input>` なら `<input is="タグ名" />` で対応可能ではあるが、普通に微妙。
+* 対応していると言われているChromeのバージョンでも期待通りの挙動にならず、原因不明。
+    * コードが間違っているのかChromeのバグかわからないため、判定式が正しいか微妙。
 
 ### `CSS カスタムプロパティ`
 
