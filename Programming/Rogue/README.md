@@ -346,10 +346,10 @@ function _check( rooms, x, y )
 	if ( rooms[ room( x, y ) ] ) { return; }
 
 	// 到達していないので上下左右の部屋を調べる
-   if ( 0 < x && connected( room( x, y ), room( x - 1, y ) ) ) { _check( rooms, x - 1, y ); }
-   if ( x  + 1< w && connected( room( x, y ), room( x - 1, y ) ) ) { _check( rooms, x + 1, y ); }
-   if ( 0 < y && connected( room( x, y ), room( x, y - 1 ) ) ) { _check( rooms, x, y - 1 ); }
-   if ( y + 1 < h && connected( room( x, y ), room( x, y + 1 ) ) ) { _check( rooms, x, y + 1 ); }
+	if ( 0 < x && connected( room( x, y ), room( x - 1, y ) ) ) { _check( rooms, x - 1, y ); }
+	if ( x  + 1< w && connected( room( x, y ), room( x - 1, y ) ) ) { _check( rooms, x + 1, y ); }
+	if ( 0 < y && connected( room( x, y ), room( x, y - 1 ) ) ) { _check( rooms, x, y - 1 ); }
+	if ( y + 1 < h && connected( room( x, y ), room( x, y + 1 ) ) ) { _check( rooms, x, y + 1 ); }
 }
 ```
 
