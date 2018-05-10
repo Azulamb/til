@@ -205,7 +205,7 @@ function calcRouteNumber( a: number, b: number )
 {
 	// bの方がaより小さい場合、aとbを入れ替える
 	if ( b < a ) { [ a, b ] = [ b, a ]; }
-   // 道番号を返す
+	// 道番号を返す
 	return ( b * b + b ) / 2 + a;
 }
 ```
