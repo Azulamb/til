@@ -7,57 +7,57 @@
 
 ```
 function addTapEvent( element: HTMLElement, time: number, ontap: ( event: Event ) => any, onlongtap: ( event: Event ) => any )
+{
+	let begin: number = 0;
+	let timer: number;
+
+	element.addEventListener( 'touchstart', ( event ) =>
 	{
-		let begin: number = 0;
-		let timer: number;
+		if ( 0 < begin ) { return; }
+		begin = Date.now();
+		timer = setTimeout( () => { if ( 0 < begin ) { begin = 0; onlongtap( event ); } timer = 0; }, time );
+	}, false );
 
-		element.addEventListener( 'touchstart', ( event ) =>
+	element.addEventListener( 'touchend', ( event ) =>
+	{
+		event.preventDefault();
+		if ( begin <= 0 ) { return; }
+		const t = Date.now() - begin;
+		begin = 0;
+		clearTimeout( timer );
+		if ( time <= t )
 		{
-			if ( 0 < begin ) { return; }
-			begin = Date.now();
-			timer = setTimeout( () => { if ( 0 < begin ) { begin = 0; onlongtap( event ); } timer = 0; }, time );
-		}, false );
+			// Long tap
+			onlongtap( event );
+		} else
+		{
+			ontap( event );
+		}
+	} );
 
-		element.addEventListener( 'touchend', ( event ) =>
-		{
-			event.preventDefault();
-			if ( begin <= 0 ) { return; }
-			const t = Date.now() - begin;
-			begin = 0;
-			clearTimeout( timer );
-			if ( time <= t )
-			{
-				// Long tap
-				onlongtap( event );
-			} else
-			{
-				ontap( event );
-			}
-		} );
+	element.addEventListener( 'mousedown', ( event ) =>
+	{
+		if ( 0 < begin ) { return; }
+		begin = Date.now();
+		timer = setTimeout( () => { if ( 0 < begin ) { begin = 0; onlongtap( event ); } timer = 0; }, time );
+	}, false );
 
-		element.addEventListener( 'mousedown', ( event ) =>
+	element.addEventListener( 'mouseup', ( event ) =>
+	{
+		if ( begin <= 0 ) { return; }
+		const t = Date.now() - begin;
+		begin = 0;
+		clearTimeout( timer );
+		if ( time <= t )
 		{
-			if ( 0 < begin ) { return; }
-			begin = Date.now();
-			timer = setTimeout( () => { if ( 0 < begin ) { begin = 0; onlongtap( event ); } timer = 0; }, time );
-		}, false );
-
-		element.addEventListener( 'mouseup', ( event ) =>
+			// Long tap
+			onlongtap( event );
+		} else
 		{
-			if ( begin <= 0 ) { return; }
-			const t = Date.now() - begin;
-			begin = 0;
-			clearTimeout( timer );
-			if ( time <= t )
-			{
-				// Long tap
-				onlongtap( event );
-			} else
-			{
-				ontap( event );
-			}
-		} );
-	}
+			ontap( event );
+		}
+	} );
+}
 ```
 
 ポイントはイベント開始時に指定時間だけ待って長押しを実行するのと、それより先にタップ終了時にはタップイベントを発生させるところでしょう。
