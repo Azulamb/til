@@ -34,3 +34,4 @@ class Sample extends HTMLElement
 ```
 
 例えばこれはチェックボックスを想定して、checkedが変更された時にchangeイベントを発火させる例となる。
+これで作った要素に`addEventListener( 'change', listener, false )`でlistenerを登録すれば呼び出されます。
