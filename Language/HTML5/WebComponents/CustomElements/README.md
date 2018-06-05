@@ -33,3 +33,71 @@ HTMLElementを継承したものは普通のCustomElementで、既存のタグ�
 
 # 具体的な手順
 
+## タグの自作
+
+```
+class MyTag extends HTMLElement
+{
+	constructor()
+	{
+		super();
+	}
+}
+```
+
+とりあえずHTMLElementを継承するパターンだけに絞ります。
+このように継承するだけです。
+
+`constructor` をオーバーライドする場合は必ず `super` を実行して下さい。
+
+## タグの登録
+
+```
+customElements.define( 'my-tag', MyTag );
+```
+
+このように、`customElements.define` を使います。
+第一引数にはタグの名前、第二引数にはクラスを与えます。
+
+重要なのは名前です。
+CustomElementsではブラウザが提供するタグとユーザーが定義したタグの境界線を引くため、自作のタグには必ず `-` を含む必要があります。
+
+これでソースを見たときにもすぐCustomElementsの利用の有無がわかります。
+
+# 実際にタグを作る
+
+実際に作るには、例えばHTMLTemplateでベースとなるタグの中身を作り、ShadowDOMでCustomElementsの内部実装を隔離し、場合によっては読み込みにHTML Importsを使うとかそういう感じになるかと思います。
+
+とりあえずそれらはそれらで他のページで扱うこととします。
+
+## 個人的な実装
+
+個人的には以下のようなテンプレートを使っています。
+
+```
+
+class MyTag extends HTMLElement
+{
+	public static init( tagname = 'my-tag' )
+	{
+		customElements.define( tagname, MyTag );}
+	}
+
+	constructor()
+	{
+		super();
+	}
+}
+```
+
+後はどこかで `MyTag.init();`を実行します。
+もしくはソース末尾に以下の処理を入れて、JSを読み込むだけで追加できるようにします。
+
+```
+window.addEventListener( 'DOMContentLoaded', () => { MyTag.init(); } );
+```
+
+正直読み込むのはJS一つにまとめられる規模がいいなと言う個人的な思いで、JSですべて書く場合はこんな形にします。
+もっと大規模で複雑ならちゃんとHTML Importsとか使うと思うんですが、それWebComponentsにする意味あるかなぁと言う気もするので。
+
+
