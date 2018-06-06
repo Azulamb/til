@@ -1,8 +1,5 @@
 class MyTag extends HTMLElement
 {
-	private contents: HTMLElement;
-	private image: HTMLImageElement;
-
 	public static init( tagname = 'clothes-thumbnail' )
 	{
 		customElements.define( tagname, this );
@@ -20,5 +17,6 @@ class MyTag extends HTMLElement
 	{
 	}
 }
+
 
 window.addEventListener( 'DOMContentLoaded', () => { MyTag.init(); } );
