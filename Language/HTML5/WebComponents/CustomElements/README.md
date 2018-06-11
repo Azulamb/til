@@ -80,7 +80,7 @@ class MyTag extends HTMLElement
 {
 	public static init( tagname = 'my-tag' )
 	{
-		customElements.define( tagname, MyTag );}
+		customElements.define( tagname, MyTag );
 	}
 
 	constructor()
