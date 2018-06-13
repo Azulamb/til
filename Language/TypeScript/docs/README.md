@@ -10,7 +10,7 @@
 
 * TypeScriptについて（ここ）
 * 開発環境構築
-    * [SublimeText/TypeScript](../../../Editor/SublimeText/TypeScript.md)
+    * [Sublime Text 3](../../../Editor/SublimeText/TypeScript.md)
 
 
 # TypeScriptについて
