@@ -200,3 +200,8 @@ Options:
  @<file>                                            Insert command line options and files from a file.
 ```
 
+### Nodistやnvmを使っている場合の注意事項
+
+Node.jsを直にインストールしていない場合、グローバルにインストールしたTypeScriptはそのNode.jsのバージョンに依存して存在しています。
+なので、新しいバージョンをインストールすると `tsc` コマンドが使えないことがあります。
+その場合は再度インストールしてください。
