@@ -11,7 +11,7 @@
 * [TypeScriptについて](./0/README.md)
 * TypeScriptの環境導入
     * [TypeScriptのインストール](./1/README.md)
-    * 初めてのビルド
+    * [初めてのビルド](./1/Hello.md)
     * ブラウザJSとサーバーサイドJS
 * 開発環境構築（どれか好きなの）
     * VisualStudio Code (予定)
