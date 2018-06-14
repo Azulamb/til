@@ -10,7 +10,7 @@
 
 * TypeScriptについて（ここ）
 * TypeScriptの環境導入
-    * [TypeScriptのインストール](./0/README.md)
+    * [TypeScriptのインストール](./1/README.md)
     * 初めてのビルド
     * ブラウザJSとサーバーサイドJS
 * 開発環境構築（どれか好きなの）
