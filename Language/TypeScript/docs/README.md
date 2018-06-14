@@ -12,7 +12,7 @@
 * TypeScriptの環境導入
     * [TypeScriptのインストール](./1/README.md)
     * [初めてのビルド](./1/Hello.md)
-* JavaScriptの基礎
+* [JavaScriptの基礎](./2/README.md)
 * 開発環境構築（どれか好きなの）
     * VisualStudio Code (予定)
     * [Sublime Text 3](../../../Editor/SublimeText/TypeScript.md)
