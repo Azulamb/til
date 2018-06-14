@@ -62,6 +62,50 @@ Why? ってなるような所も多いと思います。そこが生のJSを使�
 
 とりあえず、JavaScriptでは大まかには上に出ている `number`, `string`, `boolean`, `undefined`, `object`, `function` が基本的な型となります。
 
+### number
+
+`number` は数値です。整数も浮動小数点も一緒です。
+
+一応整数の概念もあるので、整数にしたい場合は以下のようにします。
+
+```
+const num = 1.1;
+console.log( num );
+console.log( Math.floor( num ) );
+```
+
+ちなみに、無限は `Infinity` で、不正数値は Not a Numberから `NaN` が割り当てられています。
+
+```
+// 不正な数値は数値の仲間なので、typeof的にはnumber
+console.log(typeof NaN);
+// NaN同士を比較しても false なので、数値が正常かどうかの判定にNaNは使えない。
+console.log( NaN === NaN );
+```
+
+### string
+
+`string` は文字列です。
+加工するためのメソッドが用意されている他、`length` で文字数も取得できます。
+
+
+```
+// 3文字の長さなので3
+console.log( 'aaa'.length );
+// 日本語は1文字1換算なので1
+console.log( 'あ'.length );
+// こっちは2！
+console.log( 'あい'.length );
+// 絵文字は……2？
+console.log( '😀'.length );
+```
+
+文字列に関しては基本Unicodeですが、サロゲートペアと呼ばれるものが含まれた特殊な文字に関しては正確に文字数を `length` で取得することは出来ません。
+文字数取得できるのは嘘ですごめんなさい。
+
+最近は絵文字や特殊な漢字なども使われることが増えてきたので、こういった問題があることを把握しておきましょう。
+
+
 ### 補足
 
 JavaScriptはクラスベースのオブジェクト指向型言語ではなく、プロトタイプベースのオブジェクト指向型言語です。
