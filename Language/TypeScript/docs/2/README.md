@@ -4,6 +4,8 @@ TypeScriptはJavaScript＋その型に関する知識が必要なので、初め
 
 # JavaScriptの型
 
+## 基本となる型
+
 JavaScriptには見えないものの型が存在しています。
 その型は大体以下になります。
 
@@ -56,7 +58,7 @@ Why? ってなるような所も多いと思います。そこが生のJSを使�
 
 とりあえず、JavaScriptでは大まかには上に出ている `number`, `string`, `boolean`, `undefined`, `object`, `function` が基本的な型となります。
 
-## 補足
+### 補足
 
 JavaScriptはクラスベースのオブジェクト指向型言語ではなく、プロトタイプベースのオブジェクト指向型言語です。
 
@@ -71,7 +73,7 @@ JavaScriptはクラスベースのオブジェクト指向型言語ではなく�
 
 このような特殊な型の判定はTypeScriptでは基本必要ないのですが、JavaScriptとの境界線やユーザーや外部からの入力の境界線付近で必要となります。
 
-# 型が曖昧な場合に起こりうるバグ
+## 型が曖昧な場合に起こりうるバグ
 
 上のような型のバグはまだわかりやすいのですが、例えば `parseInt` にまつわるバグはかなり根深かったりします。
 
@@ -121,3 +123,135 @@ console.log( parseInt( 0.0000009 ) );
 
 このように、JavaScriptは見えないからといって型を無視するわけにはいきません。
 それっぽく動いても動かないケースというものが存在します。
+
+# スコープ
+
+JavaScriptの変数の宣言は以下3種類です。
+
+* `var`
+    * 再代入可能。関数スコープ。
+* `let`
+    * 再代入可能。ブロックスコープ。
+* `const`
+    * 再代入不可能。ブロックスコープ。
+
+## var
+
+元々のJavaScriptにある唯一の変数を宣言するキーワードでした。
+
+よくある変数にあるように値を再代入できます。
+
+```
+// 数値を入れる変数
+var num = 0;
+// 別に後から文字列を代入しても良い
+num = 'test';
+```
+
+ただ、このスコープがかなり特殊です。
+
+まずは普通のパターン。
+
+```
+var global = 1;
+
+function func() {
+    console.log( 'func:', global );
+}
+
+console.log( global );
+++global;
+func();
+```
+
+結果は以下です。
+
+```
+1
+func: 2
+```
+
+次に宣言されていない変数を出力してみます。
+
+```
+console.log( i );
+```
+
+Node.jsだと次のような結果になります。
+
+```
+(function (exports, require, module, __filename, __dirname) { console.log( i );
+                                                                           ^
+
+ReferenceError: i is not defined
+```
+
+JavaScriptは完全に宣言すらされていないものを使おうとすると、エラーになります。
+
+では次のようなケースはどうでしょう？
+
+```
+console.log( i );
+
+for ( var i = 0 ; i < 5 ; ++i ) { console.log( i ); }
+```
+
+結果は以下です。
+
+```
+undefined
+0
+1
+2
+3
+4
+```
+
+何故かエラーになりません。
+
+JavaScriptの場合、`var` は関数スコープで、宣言した場合関数の一番始めで宣言された状態になります。なので上のコードは以下と等価です。
+
+```
+var i;
+
+console.log( i );
+
+for ( i = 0 ; i < 5 ; ++i ) { console.log( i ); }
+```
+
+iという変数はあるが、中身には何も入れていないので、undefinedという結果をまず出力し、後はループ文では開始時に0を代入されたのでそこから演算をしています。
+
+## letとconst
+
+一方最近のJavaScriptには新しい変数の宣言として `let` と `const` が追加されました。
+
+```
+console.log( i );
+
+for ( let i = 0 ; i < 5 ; ++i ) { console.log( i ); }
+```
+
+こちらのコードですが、普通にエラーになります。
+`let` と `const` はブロックがスコープなので、`i` はforループの中でのみ有効です。
+
+このように変数のスコープが分かりやすくなっているので、基本的には `let` と `const` を使うようにしましょう。
+
+## const
+
+では、constは何のためにあるのか？
+一応効果では再代入不可能となっています。
+
+```
+const pi = 3.14;
+pi = 3;
+```
+
+この場合次のようなエラーが発生します。
+
+```
+pi = 3;
+   ^
+
+TypeError: Assignment to constant variable.
+```
+
