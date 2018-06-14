@@ -10,7 +10,7 @@
 
 * TypeScriptについて（ここ）
 * TypeScriptの環境導入
-    * [TypeScriptのインストール](./o/README.md)
+    * [TypeScriptのインストール](./0/README.md)
     * 初めてのビルド
 * 開発環境構築（どれか好きなの）
     * VisualStudio Code (予定)
