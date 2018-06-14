@@ -9,12 +9,12 @@
 # 目次
 
 * TypeScriptについて（ここ）
-* 開発環境構築（どれか好きなの）
-    * VisualStudio Code (予定)
-    * [Sublime Text 3](../../../Editor/SublimeText/TypeScript.md)
 * TypeScriptの環境導入
     * TypeScriptのインストール
     * 初めてのビルド
+* 開発環境構築（どれか好きなの）
+    * VisualStudio Code (予定)
+    * [Sublime Text 3](../../../Editor/SublimeText/TypeScript.md)
 * 基本文法
 * ビルド環境の構築
     * tsconfig
