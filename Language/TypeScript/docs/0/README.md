@@ -22,7 +22,7 @@ Node.jsはモジュールをインストールすると、JavaScript内で読み
 
 これからTypeScriptをインストールしますが、TypeScriptはどこからでも使えるようにしたいので、プロジェクトのローカルではなく、グローバルに使えるようインストールします。
 
-## TypeScriptのインストール
+# TypeScriptのインストール
 
 Node.jsが使えるようになったら、次のコマンドでTypeScriptをグローバルな環境にインストールします。
 
@@ -90,7 +90,7 @@ Options:
  @<file>                                            Insert command line options and files from a file.
 ```
 
-### Nodistやnvmを使っている場合の注意事項
+## Nodistやnvmを使っている場合の注意事項
 
 Node.jsを直にインストールしていない場合、グローバルにインストールしたTypeScriptはそのNode.jsのバージョンに依存して存在しています。
 なので、新しいバージョンをインストールすると `tsc` コマンドが使えないことがあります。
