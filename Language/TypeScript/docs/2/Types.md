@@ -122,7 +122,7 @@ console.log( NaN === NaN );
 ## string
 
 `string` は文字列です。
-加工するためのメソッドが用意されている他、`length` で文字数も取得できます。
+加工するためのメソッドが用意されている他、`length` で文字数も取得できます。早速確認してみましょう！！
 
 
 ```
@@ -132,7 +132,7 @@ console.log( 'aaa'.length );
 console.log( 'あ'.length );
 // こっちは2！
 console.log( 'あい'.length );
-// 絵文字は……2？
+// 絵文字は1になるはず……あれ？2？
 console.log( '😀'.length );
 ```
 
