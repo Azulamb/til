@@ -4,7 +4,17 @@ JavaScriptの変数は以下のように宣言して使います。
 
 ```
 let test = "Test string!!";
+console.log( test );
 test = 1;
+console.log( test );
+```
+
+`console.log( 表示したいデータもしくは変数 )` で画面に文字を出力してくれます。
+結果は次のようになります。
+
+```
+Test string!!
+1
 ```
 
 `let` が変数の宣言に使われるもので、`let 変数名` で変数を宣言できます。
@@ -51,6 +61,7 @@ num = 'test';
 var global = 1;
 
 function func() {
+    // これはローカル変数として使われるので、上のglobalとは別物
     var global = 3;
     console.log( 'func:', global );
 }
@@ -68,23 +79,6 @@ console.log( global );
 func: 3
 2
 ```
-
-次に宣言されていない変数を出力してみます。
-
-```
-console.log( i );
-```
-
-Node.jsだと次のような結果になります。
-
-```
-(function (exports, require, module, __filename, __dirname) { console.log( i );
-                                                                           ^
-
-ReferenceError: i is not defined
-```
-
-JavaScriptは完全に宣言すらされていないものを使おうとすると、エラーになります。
 
 では次のようなケースはどうでしょう？
 
