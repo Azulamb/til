@@ -1,9 +1,20 @@
 # JavaScriptの型
 
+JavaScriptには見えないものの型が存在しています。
+
+一応次のようにして型を調べることが出来ます。
+
+```
+console.log( typeof 1 );
+```
+
+この結果は文字列で `number` です。
+このように文字列でその値や変数の型を調べることが出来ます。
+
+
 ## 基本となる型
 
-JavaScriptには見えないものの型が存在しています。
-その型は大体以下になります。
+JavaScriptの型を調べるため、いくつか見てみます。
 
 
 ```
@@ -56,7 +67,7 @@ Why? ってなるような所も多いと思います。そこが生のJSを使�
 
 ### number
 
-`number` は数値です。整数も浮動小数点も一緒です。
+`number` は数値です。整数も浮動小数点数も一緒です。
 
 一応整数の概念もあるので、整数にしたい場合は以下のようにします。
 
@@ -67,6 +78,7 @@ console.log( Math.floor( num ) );
 ```
 
 ちなみに、無限は `Infinity` で、不正数値は Not a Numberから `NaN` が割り当てられています。
+このように特殊な状態には特殊な名前がありますが、注意事項があります。
 
 ```
 // 不正な数値は数値の仲間なので、typeof的にはnumber
@@ -74,6 +86,8 @@ console.log(typeof NaN);
 // NaN同士を比較しても false なので、数値が正常かどうかの判定にNaNは使えない。
 console.log( NaN === NaN );
 ```
+
+このように、比較や検査には使えないと思ってください。
 
 ### string
 
@@ -100,11 +114,125 @@ console.log( '😀'.length );
 
 ### boolean
 
+`boolean` は真偽値で、2つの値しかありません。
+`true` と `false` です。
+
+何かを比較した結果、最終的にこの真偽値になる他、フラグを立てる際にも使います。
+
 ### undefined
+
+`undefined` は未定義の値です。確か宣言してない変数はそもそも扱ったらエラーになるのに何いってんだこいつ？っと思うでしょう。
+
+例えば `undefined` は以下のような時に見られます。
+
+```
+let a;
+console.log( a );
+```
+
+これを実行すると、`undefined` と表示されます。
+このように宣言はされたものの中に値が入っていない時には `undefined` が使われます。
+
+また、以下のように宣言されていない変数を使おうとすると存在すらしていないのでエラーになりますが
+
+```
+console.log( a ); // エラー
+```
+
+`typeof` を使えば存在しているかどうかをエラーなく確認できます。
+
+```
+console.log( typeof a );
+```
+
+この `undefined` のハマりポイントは、ズバリ代入できるということです。
+
+```
+let a = 1;
+console.log( typeof a );
+a = undefined;
+console.log( typeof a );
+```
+
+結果は以下になります。
+
+```
+number
+undefined
+```
+
+`undefined` だから存在すらしていない……というわけではなく、データ的には領域だけ存在するみたいなわけわからん状況が発生したりします。
+初めはちょっと混乱するかもしれませんが、`undefined` を使いこなせば、いろいろ不思議な事もできるので、なんとなく覚えておいてください。
 
 #### nullについて
 
+`undefined` と似たものに `null` があります。
+`null` は `typeof` では `object` 扱いされる他にも明確な違いがあります。
+
+それは `undefined` は未定義で空ですが、`null` は定義されていて意図的に空です。
+これは次の `object` のところで大きな違いが現れます。
+
 ### object
+
+`object` はJavaScriptでかなり自由自在にデータを入れることができるものです。
+具体的には次のように使います。
+
+```
+const user = {
+    id: 12345,
+    name: 'ユーザー名',
+    adult: true,
+};
+console.log( user );
+console.log( user.name );
+```
+
+結果は以下です。
+
+```
+{ id: 12345, name: 'ユーザー名', adult: true }
+ユーザー名
+```
+
+このように、任意のキー名（文字列）と値をセットで登録できます。
+値には何でも入るので、オブジェクトの中にオブジェクトも入れれます。
+
+### nullとundefinedの違い
+
+さて、上でも出てきた `null` と `undefined` の明確な違いです。
+
+```
+const data = {
+    name: null,
+    job: undefined,
+};
+// データをすべて表示
+console.log( data );
+// jobを表示
+console.log( data.job );
+// 存在しないキー（age）を表示
+console.log( data.age );
+// データ構造を維持した文字列（JSON）に変換
+console.log( JSON.stringify( data ) );
+```
+
+結果は以下のようになっています。
+
+```
+{ name: null, job: undefined }
+undefined
+undefined
+{"name":null}
+```
+
+`undefined` を代入した `job` とそもそも `data` に存在すらしていない `age` はどちらも `undefined` という値なので、存在しているかどうか判定することは出来ません。
+
+一見役立たずに見える `undefined` ですが、このデータをJSONという文字列データに変換すると、`null` は残り、`undefined` を指定した 'job' は項目が見当たりません。
+
+JSONはJavaScriptの基本的なデータ構造を文字列化したもので、`number`、'string'、'boolean'、'object' が使えます。
+JSONはJavaScriptで簡単に使える他、その他言語でも比較的簡単に使えるようライブラリが充実しており、特にWeb周りでよく使われる一般的なフォーマットです。
+
+JSONでは存在しない値のキーを出力する必要はないので消す一方、データはないが項目は存在する `null` に関しては消さずに残すようになっています。
 
 #### 補足
 
