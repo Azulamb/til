@@ -36,10 +36,13 @@ JavaScriptの変数は以下のように宣言して使います。
 ```
 // test という変数を宣言して、Test string!! という文字列を代入する。
 let test = "Test string!!";
+
 // 画面に変数testに入っているものを表示する。
 console.log( test );
+
 // testに1という数値を代入する。
 test = 1;
+
 // 画面に変数testに入っているものを表示する。
 console.log( test );
 ```
@@ -84,6 +87,7 @@ JavaScriptの変数には何でも入れることができるので、差異は�
 ```
 // 数値を入れる変数
 var num = 0;
+
 // 別に後から文字列を代入しても良い
 num = 'test';
 ```
@@ -103,7 +107,7 @@ function func() {
 }
 
 console.log( global );
-++global;
+global = 2;
 func();
 console.log( global );
 ```
@@ -121,7 +125,9 @@ func: 3
 ```
 console.log( i );
 
+// 5回同じことを繰り返すfor文。別のページでちゃんと扱います。
 for ( var i = 0 ; i < 5 ; ++i ) {
+    // iは0,1,2,3,4という値が順番に代入されます。
     console.log( i );
 }
 ```
