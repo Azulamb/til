@@ -1,3 +1,5 @@
+もりもり文章を削らねば
+
 # TypeScriptについて
 
 TypeScriptは型付きのJavaScriptです。Microsoftが開発しました。
