@@ -29,14 +29,14 @@ JavaScriptの型を調べるため、いくつか見てみます。
 
 
 ```
+// 真偽値
+console.log( typeof true );
+
 // 数値
 console.log( typeof 1 );
 
 // 文字列
 console.log( typeof '' );
-
-// 真偽値
-console.log( typeof true );
 
 // undefined
 console.log( typeof undefined );
@@ -60,9 +60,9 @@ console.log( typeof class{} );
 結果は以下です。
 
 ```
+boolean   // 真偽値
 number    // 数値
 string    // 文字列
-boolean   // 真偽値
 undefined // undefined
 object    // null
 object    // 配列
@@ -74,7 +74,14 @@ function  // クラス
 Why? ってなるような所も多いと思います。そこが生のJSを使っている時に辛いところです。
 例えば配列であることを調べたいのに、`typeof` とかいう型を調べてくれそうなやつを使っても、結果は `object` になるわけです。だいぶ辛いです。
 
-とりあえず、JavaScriptでは大まかには上に出ている `number`, `string`, `boolean`, `undefined`, `object`, `function` が基本的な型となります。
+とりあえず、JavaScriptでは大まかには上に出ている `boolean`, `number`, `string`, `undefined`, `object`, `function` が基本的な型となります。
+
+## boolean
+
+`boolean` は真偽値で、2つの値しかありません。
+`true` と `false` です。
+
+何かを比較した結果、最終的にこの真偽値になる他、フラグを立てる際にも使います。
 
 ## number
 
@@ -122,13 +129,6 @@ console.log( '😀'.length );
 文字数取得できるのは嘘ですごめんなさい。
 
 最近は絵文字や特殊な漢字なども使われることが増えてきたので、こういった問題があることを把握しておきましょう。
-
-## boolean
-
-`boolean` は真偽値で、2つの値しかありません。
-`true` と `false` です。
-
-何かを比較した結果、最終的にこの真偽値になる他、フラグを立てる際にも使います。
 
 ## undefined
 
