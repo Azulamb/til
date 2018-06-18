@@ -1,3 +1,5 @@
+関数の話は脱線しすぎた分離か消去しよう
+
 # JavaScriptの型
 
 JavaScriptには見えないものの型が存在しています。
@@ -279,7 +281,7 @@ undefined
 
 `undefined` を代入した `job` とそもそも `data` に存在すらしていない `age` はどちらも `undefined` という値なので、例えば `undefined` かどうかという観点で、存在しているかどうか判定することは出来ません。
 
-一見役立たずに見える `undefined` ですが、このデータをJSONという文字列データに変換すると、`null` は残り、`undefined` を指定した 'job' は項目が見当たりません。
+一見役立たずに見える `undefined` ですが、このデータをJSONという文字列データに変換すると、`null` は残り、`undefined` を指定した `job` は項目が見当たりません。
 
 JSONはJavaScriptの基本的なデータ構造を文字列化したもので、`number`、`string`、`boolean`、`object` が使えます。
 JSONはJavaScriptで簡単に使える他、その他言語でも比較的簡単に使えるようライブラリが充実しており、特にWeb周りでよく使われる一般的なフォーマットです。
@@ -292,69 +294,201 @@ JSONでは存在しない値のキーを出力する必要はないので消す�
 ## function
 
 `function` は関数です。
-関数とはある一定の処理を固めて、他の場所から呼び出せるようにしたものだと思えばよいです。
 
-以下みたいな感じで定義したり呼び出せます。
+書き方についてはすでに基本的な後部運のところで扱っているので、ここでは主な特徴について書いておきます。
+
+### 独自の空間になる
+
+関数内はJavaScriptの中でも独自の空間になります。
+変数で `const` を使おうが `let` を使おうが `var` を使おうが、ここから外には影響を与えません。
+
+様々な変数をゴミとして外部に出さないため、以下のような処理を書くことがよくあります。
 
 ```
-// 関数定義
-function func() {
-    console.log( 'FUNCTION!!!' );
+function init() {
+    様々な処理
 }
-// 関数呼び出し
+
+init();
+```
+
+もっというと関数定義もゴミになるからと、以下のようにします。
+
+```
+(function() {
+    様々な処理
+})();
+```
+
+これは
+
+```
+const init = function() { 様々な処理 }
+( init )();
+```
+
+と分解すれば、何をしているか分かると思います。
+
+### 壁を超えられないデータ
+
+関数は処理をまとめて実行できるというその特性上、文字列にすることが出来ません。
+具体的には、`console.log` でなんとなく今の状態を出力したりすることもあったりしますが、これを文字列として保持し、復旧させることが出来ません。
+
+（`console.log` で関数を出力したとき、場合によってはnative codeと表示されたり、ソースコードが表示されるものの、それは一時的な表示であって文字列で保存できるわけではない。）
+
+ブラウザでは履歴保存周りでデータをちょっとだけ保存できたり、Node.jsでも他のプロセスなどとのやり取りでJavaScriptのオブジェクトはよく受け渡しを行います。
+それは簡単に言ってしまえばJSONにデータを変換したりJavaScriptのオブジェクトに戻せるからそういう事ができます。
+
+そのため、オブジェクトの情報に出来ない関数は、プログラムが一度完全に再起動した後受けとるとか、別のプログラムに対しやり取りができないデータとなります。
+これが今まで扱ってきたデータと最も異なる部分です。
+
+### 特殊な this
+
+`this` とは自分自身のオブジェクトを指し、主に関数やメソッド（オブジェクトに紐付いた操作関数）内で使われます。
+クラスベースのオブジェクト指向型言語の場合、メソッド内で `this` はこのメソッドを持っているオブジェクトになります。
+
+JavaScriptの `this` は非常に特殊で、かなりわけわからんことになっています。
+
+#### 普通の関数
+
+普通の関数は `this` グローバル空間になります。
+
+```
+console.log( typeof a );
+function func() { this.a = 1; }
 func();
+console.log( a );
 ```
 
-他にも以下のように変数に関数を入れることも可能です。
+最初 `a` は定義すらされていなかったのに最後のには `1` を出力しています。
+
+では次のパターンはどうかというと……
 
 ```
-const func = function() {
-    console.log( 'FUNCTION!!!' );
+console.log( typeof a );
+(function () {
+    function func() { this.a = 1; }
+    func();
+})();
+console.log( a );
+```
+
+こちらも大丈夫そうです。
+
+#### オブジェクトの中の関数=メソッド
+
+次にオブジェクトの中で定義してみます。
+
+```
+const obj = {
+    count: 0,
+    method: function() { this.count = this.count + 1; }
 };
-func();
+console.log( obj );
+obj.method();
+console.log( obj );
 ```
 
-呼び出し方は変わりませんね。
-とにかくJavaScriptでは関数もしくは関数の入った変数であれば、このように呼び出すことが出来ます。
+こちら、`console.log` の出力で `count` が `obj.method()` を呼び出すことで加算されていることがわかります。
+このように、オブジェクトにくっついている関数=メソッドは、`this` がオブジェクトを指ししまします。
 
-また、先程の例のように関数に名前をつけずに定義することもできる手軽さから、JavaScriptにはコールバックという文化が根づいています。
-
-例えば有名なのは、ブラウザで以下のようにしてクリックされた時のイベントを登録する方法でしょう。
+ただし、関数は変数に代入可能です。次はどうなるでしょう？
 
 ```
-document.getElementById( 'send' ).addEventListener( 'click', function() {
-    console.log( 'button click!' );
-}, false );
-```
-
-これは、以下のようなHTMLで書かれたボタンがクリックした時に実行されます。
-
-```
-<button id+"send">Send</button>
-```
-
-### 新しい関数の書き方
-
-実は `function` による関数定義は、 変数の `var` 同様若干クセがあります。
-
-そこで、最近では新しい関数の定義方法が出てきました。
-
-```
-const func = () => {
-    console.log( 'FUNCTION!!!' );
+function countup() { this.count = this.count + 1; }
+const obj1 = {
+    count: 0,
+    method: countup,
 };
-document.getElementById( 'send' ).addEventListener( 'click', () => {
-    console.log( 'button click!' );
-}, false );
+console.log( obj1 );
+obj.method();
+console.log( obj1 );
+const obj2 = {
+    count: 0,
+    method: countup,
+};
+console.log( obj2 );
+obj2.method();
+console.log( obj2 );
 ```
 
-この書き方をアロー関数式と呼ぶようです。
+はい。`this` が `obj1` にくっついてるときは `obj1` を、 `obj2` にくっついているときは `obj2` になっています。
+同じ関数でもこのように `this` が変わります。
 
-過激派は全て新しい書き方で書くべきだ！みたいに言うこともありますが、個人的には関数名を指定して書けず、変数に入れる必要があるのが面倒だなと感じます。
-なので、個人的には普通の関数定義では `function` を使い、それ以外の変数やコールバック関数に入れるとかそういうケースではアロー関数式を使っています。
+#### そしてヤバいやつ
 
-特に、`function` の独特のクセは `this` の中身に関するものなので、独立した関数定義ではそこまで害があるわけではないので、`function` を使っても良いと思います。
-しかし、それ以外のケースでは利用が難しいケースも多々ありますので、このアロー関数式を使うようにしたほうが良いでしょう。
+```
+const obj = {
+    count: 0,
+    method: function() {
+        this.count = this.count + 1;
+        
+        // 表示する関数
+        function show() {
+            console.log( this.count );
+        }
+        show();
+    }
+};
+console.log( obj );
+obj.method();
+```
+
+なんとなく意図としては `method` 内で表示関数を定義して、そっちで `obj.count` を表示しようとしていますね。
+上で `this.count` に対する演算が効いていることから、`this` は `obj` ですもんね。
+
+結果は、`obj.method()` 実行時に `undefined` が表示されます。
+なぜなら `method()` は `obj` にくっついているので `this` が `obj` になりますが、普通の関数の `this` はグローバル空間を指すからです。
+
+##### 対処法
+
+```
+const obj = {
+    count: 0,
+    method: function() {
+        this.count = this.count + 1;
+        
+        // アロー関数式に書き換える
+        const show = () => {
+            console.log( this.count );
+        }
+        show();
+    }
+};
+console.log( obj );
+obj.method();
+```
+
+アロー関数式は宣言されたときに this が何者か決めてしまいます。
+今回 `show()` が 定義されているの時の `this` は `obj` なので、これがそのまま引き継がれています。
+
+また以下のようにも可能です。
+
+```
+const obj = {
+    count: 0,
+    method: function() {
+        this.count = this.count + 1;
+        
+        // 表示する関数
+        function show() {
+            console.log( this.count );
+        }
+        show.apply( this );
+    }
+};
+console.log( obj );
+obj.method();
+```
+
+`関数.apply( thisに設定するオブジェクト )` という呼び出し方をすると、`apply()` に渡されているオブジェクトを、関数の `this` に置き換えてくれます。
+
+#### 関数における `this` はやばい
+
+このように、関数における `this` はコロコロ変わってしまうため、慣れないとthisとは何かという哲学の問題を解くような気分になります。
+関数内で `this` を使う場合は、`this` とは何者かはっきりさせるか、アロー関数式を使って定義時の `this` を引き継ぐようにしましょう。
+
+ちなみにTypeScriptはここら辺も型チェックしてくれるのでいいぞ！！
 
 
 # 型が曖昧な場合に起こりうるバグ
