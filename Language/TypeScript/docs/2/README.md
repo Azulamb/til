@@ -15,10 +15,10 @@ JavaScriptについて知識がある人は読まなくても良いですが、�
 
 * JavaScriptの概要（このページ）
 * [JavaScriptの実行方法](./Execute.md)
+* [JavaScriptの基本的な構文](./Syntax.md)
 * [変数とスコープ](./Variable.md)
     * まとめ：変数宣言に使う優先度は `const` >>> `let` >>>>>>>>越えられない壁>>>>>>>> `var`
 * [JavaScriptの型](./Types.md)
-* ifとかforのような基本的な構文
 * 関数とイベント
 * class
 
