@@ -34,7 +34,7 @@ JavaScriptは元々ブラウザ上で動く言語として開発されました�
 * JavaScriptを動かす環境に応じた差分
     * 通常のブラウザ内で動くWebページ
     * ServiceWorkerなどWebページと連携はするがWebページの外側かつブラウザの内側
-    * Node.jsなどブラウザ外
+    * Node.jsなどブラウザ外（サーバーサイド、デスクトップなど）
     * など
 
 今回のTypeScriptは主にECMAScript中心で書いていきます。
