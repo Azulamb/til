@@ -6,7 +6,7 @@
 
 使う人はコピペして必要なやつだけ残せばいいと思う。
 
-※これを作り始めた当時Chrome歯科対応していない`<dialog>`の判定が（自分が使いたいという理由で）入っているので、ちゃんと不要な判定を消さないとひどい目にあうぞ！！
+※これを作り始めた当時Chromeしか対応していない`<dialog>`の判定が（自分が使いたいという理由で）入っているので、ちゃんと不要な判定を消さないとひどい目にあうぞ！！
 
 ```
 function BrowserCheck()
@@ -77,11 +77,11 @@ IEとかレガシーな奴は対応してないし、Ajaxみたいに何かい�
 コメントアウトしているのは以下理由。
 
 * 中途半端に対応してあるCustom Elements v1は以下のような状態にあり、正常に使えない。
-    * `Uncaught TypeError: Illegal constructor` が発生する。
-        * `HTMLInputElement` 等を継承時、 `customElements.define` の第三引数に `{ extends: 'input' }` を与えたとしても、第一引数で与えられたタグ名でタグを追加できない。
+	* `Uncaught TypeError: Illegal constructor` が発生する。
+		* `HTMLInputElement` 等を継承時、 `customElements.define` の第三引数に `{ extends: 'input' }` を与えたとしても、第一引数で与えられたタグ名でタグを追加できない。
 	* 回避方法として、例えば`<input>` なら `<input is="タグ名" />` で対応可能ではあるが、普通に微妙。
 * 対応していると言われているChromeのバージョンでも期待通りの挙動にならず、原因不明。
-    * コードが間違っているのかChromeのバグかわからないため、判定式が正しいか微妙。
+	* コードが間違っているのかChromeのバグかわからないため、判定式が正しいか微妙。
 
 ### `CSS カスタムプロパティ`
 
