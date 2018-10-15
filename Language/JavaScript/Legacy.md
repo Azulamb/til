@@ -36,7 +36,7 @@ function BrowserCheck()
 	if ( style.getPropertyValue( '--test' ) !== '0' ){ return false; }
 
 	// CSS image-rendering
-	if ( 'imageRendering' in style ) { return false; }
+	if ( !( 'imageRendering' in style ) ) { return false; }
 
 	// ServiceWorker?
 	if ( !( 'serviceWorker' in navigator ) ) { return false; }
