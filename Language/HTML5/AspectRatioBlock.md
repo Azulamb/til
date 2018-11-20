@@ -12,7 +12,7 @@
 
 ```
 <!DOCTYPE html>
-<html lang="ja" style="font-size:20px;">
+<html>
 <head>
 <style type="text/css">html{height:100%;}body{padding:0;margin:0;height:100%;overflow:hidden;position:relative;}article{padding:0;margin:auto;position:absolute;top:0;bottom:0;left:0;right:0;background-color:lightgray;}</style>
 <style type="text/css">
@@ -34,7 +34,7 @@ article { width:100vw; height:calc( var(--as-height) * 100vw / var(--as-width) )
 
 ```
 <!DOCTYPE html>
-<html lang="ja" style="font-size:20px;">
+<html>
 <head>
 <style type="text/css">html{height:100%;}body{padding:0;margin:0;height:100%;overflow:hidden;position:relative;}article{padding:0;margin:auto;position:absolute;top:0;bottom:0;left:0;right:0;background-color:lightgray;}</style>
 <style type="text/css">
