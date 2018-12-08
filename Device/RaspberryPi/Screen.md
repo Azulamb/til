@@ -19,3 +19,7 @@ https://corgi-lab.com/raspberrypi/raspberrypi3-hdmi/
 
 これでいい感じに画面を見れます。
 
+# SPI
+
+## SPIの有効化
+
