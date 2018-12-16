@@ -25,6 +25,10 @@ https://corgi-lab.com/raspberrypi/raspberrypi3-hdmi/
 
 # WaveShare 240x240, 1.3inch IPS LCD display HAT for Raspberry Pi with ST7789VW
 
+https://www.waveshare.com/wiki/1.3inch_LCD_HAT
+
+上のディスプレイを使って表示する場合。
+
 https://github.com/juj/fbcp-ili9341
 
 ```
