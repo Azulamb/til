@@ -23,3 +23,36 @@ https://corgi-lab.com/raspberrypi/raspberrypi3-hdmi/
 
 ## SPIの有効化
 
+# WaveShare 240x240, 1.3inch IPS LCD display HAT for Raspberry Pi with ST7789VW
+
+https://github.com/juj/fbcp-ili9341
+
+```
+git clone https://github.com/juj/fbcp-ili9341.git
+cd fbcp-ili9341/
+mkdir build
+cd build/
+cmake -DWAVESHARE_ST7789VW_HAT=ON -DSPI_BUS_CLOCK_DIVISOR=6 ..
+make -j
+ls
+```
+
+生成物の `fbcp-ili9341` を確認します。
+
+```
+CMakeCache.txt  CMakeFiles  cmake_install.cmake  fbcp-ili9341  Makefile
+```
+
+ファイル生成を確認できたら `/etc/rc.local` に設定を追加します。
+
+```
+_IP=$(hostname -I) || true
+if [ "$_IP" ]; then
+  printf "My IP address is %s\n" "$_IP"
+fi
+
+/PATH/fbcp-ili9341/build/fbcp-ili9341&
+exit 0
+```
+
+これで再起動するといい感じに。
