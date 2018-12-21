@@ -19,14 +19,14 @@ const uint32 = new Uint32Array( buf );
 
 ```
 new Promise( ( resolve, reject ) => {
-		const reader = new FileReader();
-		reader.onabort = reject;
-		reader.onerror = reject;
-		reader.onload = ( event ) => {
-			resolve( event.target.result );
-		};
-		reader.readAsArrayBuffer( file );
-		//reader.readAsDataURL( file );
+	const reader = new FileReader();
+	reader.onabort = reject;
+	reader.onerror = reject;
+	reader.onload = ( event ) => {
+		resolve( event.target.result );
+	};
+	reader.readAsArrayBuffer( file );
+	//reader.readAsDataURL( file );
 } );
 ```
 
@@ -46,5 +46,5 @@ data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=
 ```
 const dataurl = 'data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=';
 const p = fetch( dataurl ).then( ( result ) => { return result.arrayBuffer(); } );
-p.then( ( result ) => { console.log(new Uint8Array( result )); } );
+p.then( ( result ) => { console.log( new Uint8Array( result ) ); } );
 ```
