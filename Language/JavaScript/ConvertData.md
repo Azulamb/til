@@ -15,6 +15,23 @@ const int32  = new Int32Array( buf );
 const uint32 = new Uint32Array( buf );
 ```
 
+## File → ArrayBuffer, DataURL
+
+```
+new Promise( ( resolve, reject ) => {
+		const reader = new FileReader();
+		reader.onabort = reject;
+		reader.onerror = reject;
+		reader.onload = ( event ) => {
+			resolve( event.target.result );
+		};
+		reader.readAsArrayBuffer( file );
+		//reader.readAsDataURL( file );
+} );
+```
+
+他テキストとかもいけるけど今回はTypedArray周りがメインなので省略。
+
 ## 小技：fetchを用いた変換[ブラウザ]
 
 例えば画像を表示する時にBase64変換したのを使ったりすることもあると思います。
