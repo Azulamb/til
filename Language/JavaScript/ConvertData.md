@@ -15,7 +15,7 @@ const int32  = new Int32Array( buf );
 const uint32 = new Uint32Array( buf );
 ```
 
-## File → ArrayBuffer, DataURL
+## File/Blob → ArrayBuffer, DataURL
 
 ```
 new Promise( ( resolve, reject ) => {
@@ -27,6 +27,26 @@ new Promise( ( resolve, reject ) => {
 	};
 	reader.readAsArrayBuffer( file );
 	//reader.readAsDataURL( file );
+	//reader.readAsArrayBuffer( new Blob( [ <Uint8Array>this.zip.get( file ) ] ) );
+} );
+```
+
+### Uint8Array → HTMLImageElement
+
+```
+// data: Uint8Array
+new Promise<HTMLImageElement>( ( resolve, reject ) => {
+	const image = document.createElement( 'img' );
+	image.onload = () => { resolve( image ); };
+	const error = ( event: ProgressEvent|UIEvent ) => { reject( new Error( 'Load error:' + file ) ); };
+	image.onabort = error;
+	image.onerror = error;
+
+	const reader = new FileReader();
+	reader.onload = ( event ) => { image.src = <string>reader.result; };
+	reader.onabort = error;
+	reader.onerror = error;
+	reader.readAsDataURL( new Blob( [ data ] ) );
 } );
 ```
 
