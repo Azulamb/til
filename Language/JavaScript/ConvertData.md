@@ -31,7 +31,7 @@ new Promise( ( resolve, reject ) => {
 } );
 ```
 
-### Uint8Array → HTMLImageElement
+### Uint8Array → (Blob) → HTMLImageElement
 
 ```
 // data: Uint8Array
