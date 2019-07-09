@@ -20,17 +20,17 @@ src/
     main.ts
     sub.ts
 ```
- 
+
 Server配下のみをビルドして `build/` に出力すると以下のようになります。
- 
+
 ```
 build/
   main.js
   sub.js
 ```
- 
+
 しかし、`common/` 内のファイルを取り込むようなコードが混じると、以下のようになります。
- 
+
 ```
 build/
   types.js
@@ -38,16 +38,62 @@ build/
     main.js
     sub.js
 ```
- 
+
 types.jsの中身が空でも、import等を使えばこのような構造で出力されたりします。
 
 ### 解決策
 
 `@types` の仕組みを使わせてもらいます。
+
+具体的には `node_modules/@types/任意のディレクトリ/index.d.ts` に型定義を書いて、ビルドするようにします。
+
+`@types` が使える環境であれば、問題なく使えるはず。
+
+SublimeTextなどの自動補完が効かない場合、一旦再起動などしてみましょう。
+
+## クラス定義を隠された状態でクラスを継承する
+
+WebComponentsでは `HTMLElement` を継承してカスタム要素を定義します。
+このカスタム要素を更に継承してもカスタム要素を作れますが、そのためには基本的にそのクラスがグローバル領域から見える必要があります。
  
- 具体的には `node_modules/@types/任意のディレクトリ/index.d.ts` に型定義を書いて、ビルドするようにします。
- 
- `@types` が使える環境であれば、問題なく使えるはず。
- 
- SublimeTextなどの自動補完が効かない場合、一旦再起動などしてみましょう。
- 
+```ts
+// File: tag-a.ts
+class A extends HTMLElement {}
+customElements.define( 'tag-a', A ); 
+```
+
+```ts
+// File: tag-b.ts
+class B extends A {}
+customElements.define( 'tag-a', B );
+```
+
+しかしクラス定義を隠した状態でも `customElements.get()` を使ってクラスを継承したいです。
+
+```ts
+ // File: tag-a.ts
+interface AElement extends HTMLElement{}
+
+( () =>
+{
+	class A extends HTMLElement implements AElement {}
+	customElements.define( 'tag-a', A );
+} )();
+```
+
+このような場合は以下のようにします。
+
+```ts
+// File: tag-b.ts
+type AClass = new () => AElement;
+interface BElement extends AElement {}
+
+( () =>
+{
+	const A: AClass = customElements.get( 'tag-a' );
+	class B extends A implements BElement {}
+	customElements.define( 'tag-a', B );
+} )();
+```
+
+継承する場合クラスはコンストラクタを持つ関数型なので、その型を `type` で定義してあげればエラーなく継承できます。
