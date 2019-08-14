@@ -37,3 +37,29 @@ if ( 3 => x ) {} // 式の意味は違うが今回みたいなことにはなら
 ```js
 if ( x <= 3 ){} // 式の意味は違うが今回みたいなことにはならない。
 ```
+
+## banana
+
+```js
+('b' + 'a' + + 'a' + 'a' ).toLocaleLowerCase();
+```
+
+```txt
+"banana"
+```
+
+### 解説
+
+`+'2'` のように数値っぽいものに±をつけると無理やり数値にすることができる。（型変換）
+
+ここで `+'a'` はどうあがいても文字にできないので `NaN` になる。
+これを前提に考えると上の内容は以下になる。
+
+```js
+('b' + 'a' + + 'a' + 'a' ).toLocaleLowerCase();
+('b' + 'a' + (+'a') + 'a' ).toLocaleLowerCase();
+('b' + 'a' + 'NaN' + 'a' ).toLocaleLowerCase();
+('baNaNa' ).toLocaleLowerCase();
+'banana'
+```
+
