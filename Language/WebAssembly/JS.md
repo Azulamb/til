@@ -1,5 +1,9 @@
 # JS側の処理について
 
+https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/WebAssembly
+
+色々あるのでまとめ。
+
 ## 主要なAPIと関係
 
 ### WebAssembly.validate( buf ): boolean
