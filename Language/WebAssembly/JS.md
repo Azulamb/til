@@ -6,19 +6,19 @@ https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/We
 
 ## 主要なAPIと関係
 
-### WebAssembly.validate( buf ): boolean
+### WebAssembly.validate( buf: TYPED_ARRAY | ArrayBuffer ): boolean
 
 型付配列かArrayBufferを渡すとそれが有効なWebAssemblyのバイナリデータか判別してくれる。
 こいつは独立していると考えて良い。
 
-### WebAssembly.compile( buf ): Promise<WebAssembly.Module>
+### WebAssembly.compile( buf: TYPED_ARRAY | ArrayBuffer ): Promise<WebAssembly.Module>
 
 型付配列かArrayBufferを渡すとそれをコンパイルして使えるようにする。
 出力結果として `WebAssembly.Module` を返す。
 
 普通は読み込みと同時に使うので使う機会はほぼないが、例えばインスタンス化して複数の使う（乱数とか）の場合には使うこともある。
 
-### new WebAssembly.Instance( mod, obj )
+### new WebAssembly.Instance( mod: WebAssembly.Module, obj?: any )
 
 上で得た `WebAssembly.Module` と中で呼び出しているJS関数等を登録するオブジェクトを渡すことでインスタンス化を行う。
 ちなみにWebAssembly内で使われているJSの側のオブジェクトがないとインスタンス化に失敗する。
@@ -32,7 +32,7 @@ const instance = new WebAssembly.Instance( mod, {} );
 
 インスタンス内には `exports` があり、この中にWebAssemblyでexportした関数などが格納されている。
 
-### WebAssembly.instantiate( buf, obj ): Promise<{ module: WebAssembly.Module, instance: WebAssembly.Instance }>
+### WebAssembly.instantiate( buf: TYPED_ARRAY | ArrayBuffer, obj?: any ): Promise<{ module: WebAssembly.Module, instance: WebAssembly.Instance }>
 
 型付配列かArrayBufferと取り込むオブジェクトを渡すと `WebAssembly.Module` とインスタンス化したオブジェクトが返される。
 
@@ -40,7 +40,7 @@ const instance = new WebAssembly.Instance( mod, {} );
 
 しかし一度使うなら下の方が楽で良いと思う。
 
-### WebAssembly.instantiateStreaming( src, obj ): Promise<{ module: WebAssembly.Module, instance: WebAssembly.Instance }>
+### WebAssembly.instantiateStreaming( src: Response | Promise<Response>, obj?: any ): Promise<{ module: WebAssembly.Module, instance: WebAssembly.Instance }>
 
 `Response` もしくは `Promise<Response>` と取り込むオブジェクトを渡すと `WebAssembly.Module` とインスタンス化したオブジェクトが返される。
 早い話第一引数には `fetch()` を渡せばOK。
