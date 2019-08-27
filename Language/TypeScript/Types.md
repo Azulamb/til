@@ -97,3 +97,31 @@ interface BElement extends AElement {}
 ```
 
 継承する場合クラスはコンストラクタを持つ関数型なので、その型を `type` で定義してあげればエラーなく継承できます。
+
+## 既存メソッドの型をオーバーロードしたい
+
+よくあるのはWebComponentsで独自イベントを追加したときでしょうか。
+例えば `swipe` イベントを追加した場合以下のようにすると追加できます。
+
+```ts
+interface SwipeAreaElement extends HTMLElement
+{
+	addEventListener( type: 'swipe', listener: ( event: SwipeAreaEvent ) => any, options?: boolean | AddEventListenerOptions ): void;
+}
+
+interface SwipeAreaData
+{
+	sx: number;
+	sy: number;
+	ex: number;
+	ey: number;
+}
+
+class SwipeArea extends HTMLElement implements SwipeAreaElement
+{
+	...
+}
+```
+
+class内では効いてないようですが、インスタンス化したやつに関してはちゃんと補完が効くようです。
+
