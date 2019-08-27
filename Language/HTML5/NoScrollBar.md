@@ -1,4 +1,4 @@
-# ChromeとFirefoxでスクロールバーを消す(iOSも多分)
+# ChromeとFirefoxでスクロールバーを消す(iOSとかSafariも多分)
 
 スクロールはしたいけどスクロールバーを消す方法。
 
