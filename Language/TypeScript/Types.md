@@ -106,8 +106,11 @@ interface BElement extends AElement {}
 ```ts
 interface SwipeAreaElement extends HTMLElement
 {
+	// 元からあるやつ
 	addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+	// 新しく追加したやつ
 	addEventListener( type: 'swipe', listener: ( event: SwipeAreaEvent ) => any, options?: boolean | AddEventListenerOptions ): void;
+	// 元からあるやつ
 	addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
 }
 
