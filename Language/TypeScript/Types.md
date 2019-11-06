@@ -122,6 +122,11 @@ interface SwipeAreaData
 	ey: number;
 }
 
+interface SwipeAreaEvent extends CustomEvent
+{
+	detail: SwipeAreaData;
+}
+
 class SwipeArea extends HTMLElement implements SwipeAreaElement
 {
 	...
