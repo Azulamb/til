@@ -54,6 +54,8 @@ new Promise<HTMLImageElement>( ( resolve, reject ) => {
 
 ## 文字列 → Uint8Array → 文字列
 
+UTF-8のバイト列になるとか。
+
 ```js
 const byte = new TextEncoder().encode( 'Test' );
 const str = new TextDecoder().decode( byte );
