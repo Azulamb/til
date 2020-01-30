@@ -4,7 +4,7 @@
 
 ## ArrayBuffer → TypedArray
 
-```
+```js
 const buf    = new ArrayBuffer( 100 );
 const int8   = new Int8Array( buf );
 const uint8  = new Uint8Array( buf );
@@ -17,7 +17,7 @@ const uint32 = new Uint32Array( buf );
 
 ## File/Blob → ArrayBuffer, DataURL
 
-```
+```js
 new Promise( ( resolve, reject ) => {
 	const reader = new FileReader();
 	reader.onabort = reject;
@@ -31,9 +31,9 @@ new Promise( ( resolve, reject ) => {
 } );
 ```
 
-### Uint8Array → (Blob) → HTMLImageElement
+## Uint8Array → (Blob) → HTMLImageElement
 
-```
+```js
 // data: Uint8Array
 new Promise<HTMLImageElement>( ( resolve, reject ) => {
 	const image = document.createElement( 'img' );
@@ -52,18 +52,25 @@ new Promise<HTMLImageElement>( ( resolve, reject ) => {
 
 他テキストとかもいけるけど今回はTypedArray周りがメインなので省略。
 
+## 文字列 → Uint8Array → 文字列
+
+```js
+const byte = new TextEncoder().encode( 'Test' );
+const str = new TextDecoder().decode( byte );
+```
+
 ## 小技：fetchを用いた変換[ブラウザ]
 
 例えば画像を表示する時にBase64変換したのを使ったりすることもあると思います。
 
-```
+```js
 # 1x1の黒GIF
 data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=
 ```
 
 これをfetchに与えるとそのまま解釈してくれるので、以下のようにしてGIFのUint8Arrayを入手できたりします。
 
-```
+```js
 const dataurl = 'data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=';
 const p = fetch( dataurl ).then( ( result ) => { return result.arrayBuffer(); } );
 p.then( ( result ) => { console.log( new Uint8Array( result ) ); } );
