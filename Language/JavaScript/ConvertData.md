@@ -67,7 +67,7 @@ const str = new TextDecoder().decode( byte );
 なおASCIIだけならUint8Arrayでもいける。（配列の1つの値をUTF-16の文字コードとして認識して変換）
 
 ```js
-String.fromCharCode.apply( null, new Uint16Array( response.data ) );
+String.fromCharCode.apply( null, new Uint16Array( data ) );
 ```
 
 ## 小技：fetchを用いた変換[ブラウザ]
