@@ -61,6 +61,15 @@ const byte = new TextEncoder().encode( 'Test' );
 const str = new TextDecoder().decode( byte );
 ```
 
+## UTF-16 → 文字列
+
+上はUTF-8だがこっちはUTF-16なので注意。
+なおASCIIだけならUint8Arrayでもいける。（配列の1つの値をUTF-16の文字コードとして認識して変換）
+
+```js
+String.fromCharCode.apply( null, new Uint16Array( response.data ) );
+```
+
 ## 小技：fetchを用いた変換[ブラウザ]
 
 例えば画像を表示する時にBase64変換したのを使ったりすることもあると思います。
